@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Filter Options</h3>
+    <form>
+        <label for="dateRange">Date Range:</label><br>
+        <input type="text" id="dateRange" name="dateRange"><br>
+        <label for="timeRange">Time Range:</label><br>
+        <input type="text" id="timeRange" name="timeRange">
+    </form>
+    <h3>Characteristics</h3>
+    <form>
+        <input type="radio" id="process" name="processes" value="process">
+        <label for="process">Process</label><br>
+        <input type="radio" id="stroke" name="processes" value="stroke">
+        <label for="stroke">Stroke</label><br>
+        <input type="radio" id="M" name="processes" value="M">
+        <label for="M">M</label><br>
+        <input type="radio" id="attemptedLeader" name="processes" value="attemptedLeader">
+        <label for="attemptedLeader">Attempted Leader</label><br>
+    </form>
+    <form>
+        <input type="radio" id="visibility" name="visibilities" value="visibility">
+        <label for="visibility">Visibility</label><br>
+        <input type="radio" id="visible" name="visibilities" value="visible">
+        <label for="visible">Visible</label><br>
+        <input type="radio" id="Out" name="visibilities" value="Out">
+        <label for="Out">Out</label><br>
+    </form>
+    <form>
+        <input type="radio" id="strikePoint" name="strikePoint" value="strikePoint">
+        <label for="strikePoint">Strike Point</label><br>
+    </form>
+    <form>
+        <input type="radio" id="duration" name="duration" value="duration">
+        <label for="duration">Duration</label><br>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+    </form>
+    <form>
+        <input type="radio" id="polarity" name="polarities" value="polarity">
+        <label for="polarity">Polarity</label><br>
+        <input type="radio" id="positive" name="polarities" value="positive">
+        <label for="positive">Positive</label><br>
+        <input type="radio" id="negative" name="polarities" value="negative">
+        <label for="negative">Negative</label><br>
+    </form>
+    <h3>Calculated Properties</h3>
+    <form>
+        <input type="radio" id="totalDuration" name="totalDuration" value="totalDuration">
+        <label for="totalDuration">Total Duration</label><br>
+        <input type="radio" id="timeInterval" name="timeInterval" value="timeInterval">
+        <label for="timeInterval">Time Interval Between Strokes</label><br>
+    </form>
+
+</body>
+
+</html>
