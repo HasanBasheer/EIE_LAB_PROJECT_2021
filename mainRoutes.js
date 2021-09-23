@@ -4,6 +4,10 @@ const express = require('express')
 // const app = express()
 const mainRouter = express.Router()
 
+mainRouter.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'login.html'))
+})
+
 mainRouter.get('/homepage', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'homepage.html'))
 })
