@@ -2,6 +2,7 @@
 
 const email = document.getElementById('email')
 const password = document.getElementById('password')
+let check = false
 
 async function verifyLogin () {
   if (email.value === '') {
@@ -24,11 +25,25 @@ async function verifyLogin () {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: username.value,
+        email: email.value,
         password1: password.value
       })
     }).catch((err) => console.log(err))
     const data = await res.json()
     check = data.body
+  }
+  if (check === true) {
+    /*
+    let url = window.location.href
+    url = url.replace('?', '')
+    url = url.replace('homepage', '')
+    url = url.replace('CreateGroup', '')
+    url = url.replace('invitations', '')
+    url = url.replace('covidScreen', '')
+    url = url.replace('groupView', '')
+    location.assign(url + 'homepage')
+    */
+  } else if (check === false) {
+    alert('Incorrect email or password')
   }
 }
