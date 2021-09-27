@@ -8,7 +8,7 @@ const mainRouter = require('../mainRoutes')
 
 mainRouter.post('/', function (req, result) {
   const email = req.body.email
-  const password = req.body.password1
+  const password = req.body.password
   const obj = connection.escape(email)
 
   connection.query(
@@ -24,7 +24,7 @@ mainRouter.post('/', function (req, result) {
           }
           if (res === true) {
             req.session.isLoggedin = true
-            // req.session.ids = resp[0].studentID
+            req.session.ids = resp[0].user_ID
             result.json({ body: true })
           } else {
             result.json({ body: false })

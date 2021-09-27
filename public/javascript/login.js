@@ -26,7 +26,7 @@ async function verifyLogin () {
       },
       body: JSON.stringify({
         email: email.value,
-        password1: password.value
+        password: password.value
       })
     }).catch((err) => console.log(err))
     const data = await res.json()
