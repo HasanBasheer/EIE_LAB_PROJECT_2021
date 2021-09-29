@@ -16,6 +16,6 @@ mainRouter.post('/user/', userController.validate('createUser'), userController.
 
 mainRouter.get('/user/:emailAddress', userController.findByEmailAddress)
 
-mainRouter.post('/student/', userController.validate('createUser'), userController.createUser)
+mainRouter.post('/user/', userController.validate('createUser'), userController.createUser)
 
 module.exports = mainRouter

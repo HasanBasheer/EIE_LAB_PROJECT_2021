@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-// app.use('/homepage', mainRouter)
+app.use('/registration', mainRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port)

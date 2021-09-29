@@ -14,9 +14,9 @@ const User = function (user) {
 }
 
 User.findByEmailAddress = function (email, result) {
-  connection.query('SELECT * FROM students_table WHERE email = ?', email, function (err, res) {
+  connection.query('SELECT * FROM users_table WHERE email = ?', email, function (err, res) {
     if (err) {
-      console.log('Could not find student with email address ' + email, err)
+      console.log('Could not find users_table with email address ' + email, err)
       result(null, null)
     } else {
       result(null, res)
@@ -33,7 +33,7 @@ User.create = function (newUser, result) { // do validations and throw exception
     }
     const password = newUser.password
     newUser.password = bcrypt.hashSync(newUser.password, saltRounds)
-    connection.query('INSERT INTO users set ?', newUser, function (err, res) {
+    connection.query('INSERT INTO users_table set ?', newUser, function (err, res) {
       if (err) {
         console.log('error: ', err)
         result(err, null)
