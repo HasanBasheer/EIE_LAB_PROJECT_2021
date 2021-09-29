@@ -1,10 +1,16 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
+<header>
+    <script defer type="text/javascript" src="/javascript/login.js"></script>
+</header>
+
 <body>
     <h1>Login</h1>
     <div>
@@ -16,12 +22,15 @@
         <input type="password" name="password" id="password">
     </div>
     <div>
-        <input type="button" id="login" value="Log in">        
+        <button id="login" type="submit" onclick="return verifyLogin()">Login</button>
     </div>
     <div>
-        <label for="register">Need an accout? </label>
-        <input type="button" id="register" value="Register">
+        <label for="registration">Need an account? </label>
+        <form action="/registration" method="GET">
+            <button type="submit" id="register">Register</button>
+        </form>
     </div>
 
 </body>
+
 </html>
