@@ -12,10 +12,9 @@ mainRouter.get('/homepage', function (req, res) {
 mainRouter.get('/registration', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'registration.html'))
 })
-mainRouter.post('/user/', userController.validate('createUser'), userController.createUser)
+
+mainRouter.post('/user/', userController.createUser)
 
 mainRouter.get('/user/:emailAddress', userController.findByEmailAddress)
-
-mainRouter.post('/user/', userController.validate('createUser'), userController.createUser)
 
 module.exports = mainRouter

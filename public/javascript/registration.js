@@ -4,15 +4,15 @@ $(document).ready(function () {
     window.location.href = '/'
   })
 
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
   const firstName = $('#firstName')
   const lastName = $('#lastName')
   const email = $('#email')
   const password = $('#password')
 
   $('#reg').click(function () {
-    $('#closeBtn').hide()
-    $('#proceedToLoginBtn').hide()
+    // $('#closeBtn').hide()
+    // $('#proceedToLoginBtn').hide()
 
     let valid = true
     valid = valid && checkLength(firstName, 'First Name', 2, 20)
@@ -20,19 +20,19 @@ $(document).ready(function () {
     valid = valid && checkLength(email, 'Email', 6, 80)
     valid = valid && checkLength(password, 'Password', 5, 20)
 
-    valid = valid && checkRegexp(email, emailRegex, 'eg. studentnumber@wits.ac.za')
+    valid = valid && checkRegexp(email, emailRegex, 'eg. jack@gmail.ac.za')
     valid = valid && checkRegexp(password, /^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/, 'Password requires one uppercase letter, one lowercase letter, one number and one special character')
     if (!valid) {
       return
     }
     const formData = {}
-    $('#myRegistrationForm')
+    $('#myRegistrationForm').find('div')
       .find('input')
       .each(function () {
         console.log($(this).val())
         formData[$(this).attr('id')] = $(this).val()
       })
-    $.post('/student', formData)
+    $.post('/user', formData)
       .fail(function (err) {
         console.log('Registration Failed')
         throw err

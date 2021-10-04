@@ -21,3 +21,5 @@ connection.getConnection(
     }
   }
 )
+
+module.exports = connection

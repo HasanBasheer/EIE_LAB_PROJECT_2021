@@ -26,6 +26,7 @@ exports.findByEmailAddress = function (req, res) {
 exports.validate = (method) => {
   switch (method) {
     case 'createUser': {
+      console.log(JSON.stringify(body))
       return [
         body('firstName', 'firstName doesn\'t exists').exists(),
         body('lastName', 'lastName doesn\'t exists').exists(),
@@ -55,7 +56,7 @@ exports.createUser = function (req, res) {
     return
   }
 
-  User.create(newUser, function (err, student) {
+  User.create(newUser, function (err, user) {
     if (err) {
       res.status(400).send({ error: true, message: err })
       return
@@ -63,7 +64,7 @@ exports.createUser = function (req, res) {
     res.json({
       error: false,
       message:
-        'User with email address' + newUser.email + ' added successfully!',
+        'User with email address ' + newUser.email + ' added successfully!',
       data: user
     })
   })
