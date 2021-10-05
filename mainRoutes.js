@@ -7,6 +7,12 @@ const userController = require('./controllers/user.controller.js')
 const { body, validationResult } = require('express-validator')
 const session = require('express-session')
 
+const userController = require('./controllers/user.controller.js')
+const { body, validationResult } = require('express-validator')
+
+const session = require('express-session')
+
+
 mainRouter.use(
   session({
     secret: 'keypass',
