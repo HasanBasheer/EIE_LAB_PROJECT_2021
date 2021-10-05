@@ -5,6 +5,8 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(express.urlencoded({ extended: true }))
+
 app.use(express.json())
 
 const mainRouter = require('./mainRoutes')
@@ -14,6 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
+app.use('/registration', mainRouter)
 const loginRoutes = require('./routes/login.routes')
 app.use('/', loginRoutes)
 
