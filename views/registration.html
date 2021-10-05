@@ -1,42 +1,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/javascript/registration.js"></script>
 </head>
 <body>
-    <h1>Registration</h1>
-    <div>
-        <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" id="firstname">
-    </div>
-    <div>
-        <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" id="lastname">
-    </div>
-    <div>
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email">
-    </div>
-    <div>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password">
-    </div>
-    <div>
-        <label for="password2">Confirm Password: </label>
-        <input type="password" name="password2" id="password2">
-    </div>
-    <div>
-        <label for="authtoken">Authentication Token: </label>
-        <input type="text" name="authtoken" id="authtoken">
-    </div>
-    <div>
-        <input type="button" id="register" value="Register">        
-    </div>
-    <div>
-        <label for="login">Already have an account? </label>
-        <input type="button" id="login" value="Log in">
+    <div class="registration-form container">
+        <h1>Registration</h1>
+        <form id="myRegistrationForm">
+            <div>
+                <label for="firstname">First Name: </label>
+                <input type="text" name="firstName" id="firstName">
+            </div>
+            <div>
+                <label for="lastname">Last Name: </label>
+                <input type="text" name="lastName" id="lastName">
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div>
+                <label for="authtoken">Authentication Token: </label>
+                <input type="text" name="authtoken" id="authtoken">
+            </div>
+            <div>
+                <input type="button" id="reg" value="Register">        
+            </div>
+            <div>
+                <label for="login">Already have an account? </label>
+                <input type="button" id="proceedToLoginBtn" value="Log In">
+            </div>
+        </form>
     </div>
 </body>
 </html>
