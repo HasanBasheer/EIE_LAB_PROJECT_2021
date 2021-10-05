@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
 })
 
 app.use('/registration', mainRouter)
+const loginRoutes = require('./routes/login.routes')
+app.use('/', loginRoutes)
+
+// app.use('/login.html', mainRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port)
