@@ -11,9 +11,6 @@ $(document).ready(function () {
   const password = $('#password')
 
   $('#reg').click(function () {
-    // $('#closeBtn').hide()
-    // $('#proceedToLoginBtn').hide()
-
     let valid = true
     valid = valid && checkLength(firstName, 'First Name', 2, 20)
     valid = valid && checkLength(lastName, 'Last Name', 2, 20)

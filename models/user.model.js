@@ -14,7 +14,6 @@ const User = function (user) {
 }
 
 User.findByEmailAddress = function (email, result) {
-  console.log(email)
   connection.query('SELECT * FROM users_table WHERE email = ?', email, function (err, res) {
     if (err) {
       console.log('Could not find user with email address ' + email, err)
@@ -40,7 +39,6 @@ User.create = function (newUser, result) { // do validations and throw exception
         result(err, null)
       } else {
         result(null, res.insertId)
-        // connection.query('UPDATE students_table SET location = POINT(?,?) WHERE studentID=?', [newStudent.latitude, newStudent.longitude, res.insertId])
       }
     })
   })
