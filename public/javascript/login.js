@@ -33,16 +33,10 @@ async function verifyLogin () {
     check = data.body
   }
   if (check === true) {
-    /*
     let url = window.location.href
     url = url.replace('?', '')
     url = url.replace('homepage', '')
-    url = url.replace('CreateGroup', '')
-    url = url.replace('invitations', '')
-    url = url.replace('covidScreen', '')
-    url = url.replace('groupView', '')
     location.assign(url + 'homepage')
-    */
   } else if (check === false) {
     alert('Incorrect email or password')
   }
