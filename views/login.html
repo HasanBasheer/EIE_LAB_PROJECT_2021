@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <header>
@@ -12,25 +13,26 @@
 </header>
 
 <body>
-    <h1>Login</h1>
-    <div>
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email">
-    </div>
-    <div>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password">
-    </div>
-    <div>
-        <button id="login" type="submit" onclick="return verifyLogin()">Login</button>
-    </div>
-    <div>
-        <label for="registration">Need an account? </label>
-        <form action="/registration" method="GET">
-            <button type="submit" id="register">Register</button>
-        </form>
-    </div>
-
+    <section id="flex-container">
+        <section id="login-form">
+            <h1>Login</h1>
+            <div id="emaildiv">
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div id="passworddiv">
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password">
+            </div>
+                <button id="login" type="submit" onclick="return verifyLogin()">Log In</button>
+            <div id="message">
+                <label for="registration">Need an account? </label>
+            </div>
+                <form action="/registration" method="GET">
+                    <button type="submit" id="register">Register</button>
+                </form>
+        </section>
+    </section>
 </body>
 
 </html>

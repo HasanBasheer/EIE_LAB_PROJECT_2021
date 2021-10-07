@@ -5,9 +5,10 @@
     <title>Registration</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer type="text/javascript" src="/javascript/registration.js"></script>
+    <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
-    <div class="registration-form container">
+    <div id="flex-container">
         <h1>Registration</h1>
         <form id="myRegistrationForm">
             <div>
@@ -33,10 +34,10 @@
             <div>
                 <input type="button" id="reg" value="Register">        
             </div>
-            <div>
+            <div id="message">
                 <label for="login">Already have an account? </label>
-                <input type="button" id="proceedToLoginBtn" value="Log In">
             </div>
+                <input type="button" id="proceedToLoginBtn" value="Log In">
         </form>
     </div>
 </body>
