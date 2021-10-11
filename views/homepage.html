@@ -10,82 +10,90 @@
 </head>
 
 <body>
-    <h1> Project Zeus Lightning Statistics</h1>
-    <h3>Filter Options</h3>
-    <form>
-        <label for="dateRange">Date:</label><br>
-        <input type="date" id="dateRange" name="date" value="2018-07-22" min="2017-02-05" max="2020-02-06"><br>
-        <label for="timeRange">Time:</label><br>
-        <input type="time" id="timeRange" name="time" min="00:00" max="23:59" required>
-    </form>
-    <h3>Characteristics</h3>
-    <form>
-        <input type="checkbox" id="process" name="processes" value="process">
-        <label for="process">Process</label><br>
-        <input type="checkbox" id="stroke" name="processes" value="Stroke">
-        <label for="stroke">Stroke</label><br>
-        <input type="checkbox" id="M" name="processes" value="M">
-        <label for="M">M</label><br>
-        <input type="checkbox" id="attemptedLeader" name="processes" value="Attempted Leader">
-        <label for="attemptedLeader">Attempted Leader</label><br>
-    </form>
-    <form>
-        <input type="checkbox" id="visibility" name="visibilities" value="Visibility">
-        <label for="visibility">Visibility</label><br>
-        <input type="checkbox" id="visible" name="visibilities" value="Visible">
-        <label for="visible">Visible</label><br>
-        <input type="checkbox" id="Out" name="visibilities" value="Out">
-        <label for="Out">Out</label><br>
-    </form>
-    <form>
-        <label>Strike Point</label> <br>
-        <label for="minstrikepoint">Min</label>
-        <input id="minstrikepoint" type="range" min="0" max="5" value="0" oninput="minstrikepointbox.value=minstrikepoint.value">
-        <input id="minstrikepointbox" type="number" value="0" min="0" max="5" oninput="minstrikepoint.value=minstrikepointbox.value"> <br>
-        <label for="maxstrikepoint">Max</label>
-        <input id="maxstrikepoint" type="range" min="0" max="5" value="5" oninput="maxstrikepointbox.value=maxstrikepoint.value">
-        <input id="maxstrikepointbox" type="number" value="5" min="0" max="5" oninput="maxstrikepoint.value=maxstrikepointbox.value">
-    </form>
-    <form>
-        <input type="checkbox" id="duration" name="duration" value="duration">
-        <label for="duration">Duration</label><br>
-        <div class="DurationSlideContainer">
-            <label for="minduration">Min</label>
-            <input id="minduration" type="range" min="0" max="1173" value="0" oninput="mindurationbox.value=minduration.value">
-            <input id="mindurationbox" type="number" value="0" min="0" max="1173" oninput="minduration.value=mindurationbox.value"> <br>
-            <label for="maxduration">Max</label>
-            <input id="maxduration" type="range" min="0" max="1173" value="1173" oninput="maxdurationbox.value=maxduration.value">
-            <input id="maxdurationbox" type="number" value="1173" min="0" max="1173" oninput="maxduration.value=maxdurationbox.value">
+    <section id="flex-container">
+        <h1> Project Zeus Lightning Statistics</h1>
+        <h3>Filter Options</h3>
+        <div>
+            <label for="dateRange">Date:</label><br>
+            <input type="date" id="dateRange" name="date" value="2018-07-22" min="2017-02-05" max="2020-02-06"><br>
+            <label for="timeRange">Time:</label><br>
+            <input type="time" id="timeRange" name="time" min="00:00" max="23:59" required> <br>
+            <label for="msTimeSlider">Milliseconds:</label><br>
+            <input id="msTimeSlider" type="range" min="0" max="999" value="500" oninput="msTimeBox.value=msTimeSlider.value">
+            <input id="msTimeBox" type="number" value="500" min="0" max="999" oninput="msTimeSlider.value=msTimeBox.value">
         </div>
-
-    </form>
-    <form>
-        <input type="checkbox" id="polarity" name="polarities" value="polarity">
-        <label for="polarity">Polarity</label><br>
-        <input type="checkbox" id="positive" name="polarities" value="positive">
-        <label for="positive">Positive</label><br>
-        <input type="checkbox" id="negative" name="polarities" value="negative">
-        <label for="negative">Negative</label><br>
-    </form>
-    <h3>Calculated Properties</h3>
-    <form>
-        <input type="checkbox" id="totduration" name="totduration" value="Total Duration">
-        <label for="totduration">Total Duration</label><br>
-        <div class="TotalDurationSlideContainer">
-            <label for="mintotduration">Min</label>
-            <input id="mintotduration" type="range" min="0" max="1173" value="0" oninput="mintotdurationbox.value=mintotduration.value">
-            <input id="mintotdurationbox" type="number" value="0" min="0" max="1173" oninput="mintotduration.value=mintotdurationbox.value"> <br>
-            <label for="maxtotduration">Max</label>
-            <input id="maxtotduration" type="range" min="0" max="1173" value="1173" oninput="maxtotdurationbox.value=maxtotduration.value">
-            <input id="maxtotdurationbox" type="number" value="1173" min="0" max="1173" oninput="maxtotduration.value=maxtotdurationbox.value">
+        <h3>Characteristics</h3>
+        <div>
+            <input type="checkbox" id="process" name="processes" value="process">
+            <label for="process">Process</label><br>
+            <input type="checkbox" id="stroke" name="processes" value="Stroke">
+            <label for="stroke">Stroke</label><br>
+            <input type="checkbox" id="M" name="processes" value="M">
+            <label for="M">M</label><br>
+            <input type="checkbox" id="attemptedLeader" name="processes" value="Attempted Leader">
+            <label for="attemptedLeader">Attempted Leader</label><br>
         </div>
-    </form>
+        <div>
+            <input type="checkbox" id="visibility" name="visibilities" value="Visibility">
+            <label for="visibility">Visibility</label><br>
+            <input type="checkbox" id="visible" name="visibilities" value="Visible">
+            <label for="visible">Visible</label><br>
+            <input type="checkbox" id="Out" name="visibilities" value="Out">
+            <label for="Out">Out</label><br>
+        </div>
+        <div>
+            <input type="checkbox" id="strikePoint" name="strikepoints" value="Visibility">
+            <label for="strikepoint">Strike Point</label> <br>
+            <label for="minstrikepoint">Min</label>
+            <input id="minstrikepoint" type="range" min="0" max="10" value="0" oninput="minstrikepointbox.value=minstrikepoint.value">
+            <input id="minstrikepointbox" type="number" value="0" min="0" max="10" oninput="minstrikepoint.value=minstrikepointbox.value"> <br>
+            <label for="maxstrikepoint">Max</label>
+            <input id="maxstrikepoint" type="range" min="0" max="10" value="10" oninput="maxstrikepointbox.value=maxstrikepoint.value">
+            <input id="maxstrikepointbox" type="number" value="10" min="0" max="10" oninput="maxstrikepoint.value=maxstrikepointbox.value">
+        </div>
+        <div>
+            <input type="checkbox" id="duration" name="duration" value="duration">
+            <label for="duration">Duration</label><br>
+            <div class="DurationSlideContainer">
+                <label for="minduration">Min</label>
+                <input id="minduration" type="range" min="0" max="1200" value="0" oninput="mindurationbox.value=minduration.value">
+                <input id="mindurationbox" type="number" value="0" min="0" max="1200" oninput="minduration.value=mindurationbox.value"> <br>
+                <label for="maxduration">Max</label>
+                <input id="maxduration" type="range" min="0" max="1200" value="1200" oninput="maxdurationbox.value=maxduration.value">
+                <input id="maxdurationbox" type="number" value="1200" min="0" max="1200" oninput="maxduration.value=maxdurationbox.value">
+            </div>
 
-    <div>
-        <input type="button" id="filterButton" value="Filter Search"> <br>
-        <input type="button" id="clearFilter" value="Clear Filters"> <br>
-        <input type="button" id="logout" value="Logout">
-    </div>
+        </div>
+        <div>
+            <input type="checkbox" id="polarity" name="polarities" value="polarity">
+            <label for="polarity">Polarity</label><br>
+            <input type="checkbox" id="positive" name="polarities" value="positive">
+            <label for="positive">Positive</label><br>
+            <input type="checkbox" id="negative" name="polarities" value="negative">
+            <label for="negative">Negative</label><br>
+            <input type="checkbox" id="unclassified" name="polarities" value="without classification">
+            <label for="unclassified">Without Classfication</label><br>
+        </div>
+        <!-- <h3>Calculated Properties</h3>
+        <div>
+            <input type="checkbox" id="totduration" name="totduration" value="Total Duration">
+            <label for="totduration">Total Duration</label><br>
+            <div class="TotalDurationSlideContainer">
+                <label for="mintotduration">Min</label>
+                <input id="mintotduration" type="range" min="0" max="1173" value="0" oninput="mintotdurationbox.value=mintotduration.value">
+                <input id="mintotdurationbox" type="number" value="0" min="0" max="1173" oninput="mintotduration.value=mintotdurationbox.value"> <br>
+                <label for="maxtotduration">Max</label>
+                <input id="maxtotduration" type="range" min="0" max="1173" value="1173" oninput="maxtotdurationbox.value=maxtotduration.value">
+                <input id="maxtotdurationbox" type="number" value="1173" min="0" max="1173" oninput="maxtotduration.value=maxtotdurationbox.value">
+            </div>
+        </div> -->
+
+        <div>
+            <input type="button" id="filterButton" value="Filter Search"> <br>
+            <input type="button" id="clearFilter" value="Clear Filters"> <br>
+            <input type="button" id="logout" value="Logout">
+        </div>
+    </section>
 </body>
 
 </html>
