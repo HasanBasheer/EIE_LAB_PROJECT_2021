@@ -36,4 +36,4 @@ Lightning.create = function (newLightning, result) { // do validations and throw
   //})
 }
 
-module.exports = Student
+module.exports = Lightning

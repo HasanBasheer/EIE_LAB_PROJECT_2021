@@ -6,7 +6,7 @@ const Lightning = require('../models/updateData.model')
 exports.createData = function (req, res) {
 
     //run python excel code
-
+    
 
     // const newLightning = new Lightning(req.body)
 
