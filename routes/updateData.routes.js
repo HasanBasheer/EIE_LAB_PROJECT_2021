@@ -5,8 +5,8 @@ const router = express.Router()
 
 const updateDataController = require('../controllers/updateData.controller')
 
-router.post('/updateData', (req, res) => {
-    console.log('routes')
+router.post('/', (req, res) => {
+    /*
     const process_reference = req.body.process_reference
     const stroke_channel_num = req.body.stroke_channel_num
     const process_day = req.body.process_day
@@ -16,6 +16,7 @@ router.post('/updateData', (req, res) => {
     const polarity = req.body.polarity
     const visibility = req.body.visibility
     const duration = req.body.duration
+    */
     //updateDataController.createData(process_reference, stroke_channel_num, process_day, process_time, 
       //  process, strike_point, polarity, visibility, duration, res)
     updateDataController.createData(req, res)
