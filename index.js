@@ -17,8 +17,12 @@ app.get('/', (req, res) => {
 })
 
 app.use('/registration', mainRouter)
+
 const loginRoutes = require('./routes/login.routes')
 app.use('/', loginRoutes)
+
+const updateDataRoutes = require('./routes/updateData.routes')
+app.use('/updateData', updateDataRoutes)
 
 // app.use('/login.html', mainRouter)
 
