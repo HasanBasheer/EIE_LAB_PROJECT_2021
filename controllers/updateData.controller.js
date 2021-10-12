@@ -29,27 +29,30 @@ let pol = []
 let v = []
 let d = []
 
-xlsxFile('../EIE_LAB_PROJECT_2021/Data.xlsx').then((rows) => {
-    pr = rows.map(d => d[0])
-    scn = rows.map(d => d[1])
-    py = rows.map(d => d[4])
-    pm = rows.map(d => d[5])
-    pd = rows.map(d => d[6])
-    ph = rows.map(d => d[7])
-    pmin = rows.map(d => d[8])
-    ps = rows.map(d => d[9])
-    pmilli = rows.map(d => d[10])
-    p = rows.map(d => d[11])
-    sp = rows.map(d => d[12])
-    pol = rows.map(d => d[13])
-    v = rows.map(d => d[15])
-    d = rows.map(d => d[16])
-})
+
 
 // exports.createData = function (process_reference, stroke_channel_num, process_day, process_time, 
 //     process, strike_point, polarity, visibility, duration, res) {
 
 exports.createData = function (req, res) {
+
+    xlsxFile('../EIE_LAB_PROJECT_2021/upload/Data.xlsx').then((rows) => {
+        pr = rows.map(d => d[0])
+        scn = rows.map(d => d[1])
+        py = rows.map(d => d[4])
+        pm = rows.map(d => d[5])
+        pd = rows.map(d => d[6])
+        ph = rows.map(d => d[7])
+        pmin = rows.map(d => d[8])
+        ps = rows.map(d => d[9])
+        pmilli = rows.map(d => d[10])
+        p = rows.map(d => d[11])
+        sp = rows.map(d => d[12])
+        pol = rows.map(d => d[13])
+        v = rows.map(d => d[15])
+        d = rows.map(d => d[16])
+    })
+
     //'./HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
     for (let x = 1; x < pr.length; x++) {
         //const newLightning = new Lightning(req.body)
