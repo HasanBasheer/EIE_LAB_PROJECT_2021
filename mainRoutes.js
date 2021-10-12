@@ -26,7 +26,7 @@ const isLoggedIn = (req, res, next) => {
 
 mainRouter.get('/', function (req, res) {
   req.session.destroy
-  req.session.isLoggedIn = false
+  req.session.isLoggedin = false
   res.sendFile(path.join(__dirname, 'views', 'login.html'))
 })
 
@@ -36,9 +36,6 @@ mainRouter.get('/registration', function (req, res) {
 
 mainRouter.get('/homepage', isLoggedIn, function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'homepage.html'))
-})
-mainRouter.get('/registration', function (req, res) {
-  res.sendFile(path.join(__dirname, 'views', 'registration.html'))
 })
 
 mainRouter.post('/user/', userController.createUser)

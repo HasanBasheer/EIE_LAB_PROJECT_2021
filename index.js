@@ -12,9 +12,11 @@ app.use(express.json())
 const mainRouter = require('./mainRoutes')
 app.use(mainRouter)
 
+/*
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
+*/
 
 app.use('/registration', mainRouter)
 
