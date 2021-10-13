@@ -84,9 +84,10 @@
     <div>
         <input type="button" id="filterButton" value="Filter Search"> <br>
         <input type="button" id="clearFilter" value="Clear Filters"> <br>
-        <button id="Data" type="submit" onclick="return updateData()">Update Data</button>
-        
     </div>
+    <form action="/upload" method="GET">
+        <button type="submit" id="upload"> Upload Data</button>
+    </form>
     <form action="/" method="GET">
         <button type="submit" id="addButton"> Logout</button>
     </form>

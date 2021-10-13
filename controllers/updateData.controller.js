@@ -5,6 +5,7 @@ const connection = require('../config/db.config')
 
 let process_day = ''
 let process_time = ''
+let process_time_millisecond = ''
 let process_reference = ''
 let stroke_channel_num = ''
 let process = ''
@@ -28,11 +29,6 @@ let sp = []
 let pol = []
 let v = []
 let d = []
-
-
-
-// exports.createData = function (process_reference, stroke_channel_num, process_day, process_time, 
-//     process, strike_point, polarity, visibility, duration, res) {
 
 exports.createData = function (req, res) {
 
@@ -65,8 +61,8 @@ exports.createData = function (req, res) {
         visibility = v[x]
         duration = d[x]
         process_day = py[x] + '-' + pm[x] + '-' + pd[x]
-        process_time = ph[x] + ':' + pmin[x] + ':' + ps[x] + ':' + pmilli[x]
-
+        process_time = ph[x] + ':' + pmin[x] + ':' + ps[x]
+        process_time_millisecond = pmilli[x]
 
         const newLightning = {
             process_reference,
@@ -74,6 +70,7 @@ exports.createData = function (req, res) {
             process_day,
             process_time,
             process,
+            process_time_millisecond,
             strike_point,
             polarity,
             visibility,
@@ -83,24 +80,8 @@ exports.createData = function (req, res) {
             if (err) {
                 console.log('error: ', err)
                 //res(err, null)
-            } else {
-                //res(null)
             }
         })
-        /*
-        Lightning.create(newLightning, function (err, lightning) {
-            if (err) {
-                res.status(400).send({ error: true, message: err })
-                return
-            }
-            res.json({
-                error: false,
-                message:
-                    'Data Added',
-                data: lightning
-            })
-        })
-        */
     }
 }
 
