@@ -20,7 +20,7 @@ const SearchObject = function (searchObject) {
 }
 
 SearchObject.createQuery = function (searchObject, result) {
-  console.log(searchObject)
+  // console.log(searchObject)
   // res(null, [])
   const searchParams = []
   let searchQuery = 'SELECT * FROM lightning_data WHERE 1 = 1'
