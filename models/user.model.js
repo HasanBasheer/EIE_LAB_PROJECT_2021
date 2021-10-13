@@ -13,6 +13,17 @@ const User = function (user) {
   this.password = user.password
 }
 
+User.checkAuthToken = function (authtoken, result) {
+  connection.query('SELECT * FROM tokens_table WHERE token = ?', authtoken, function (err, res) {
+    if (err) {
+      console.log('Invalid Authentication Token', err)
+      result(null, null)
+    } else {
+      result(null, res)
+    }
+  })
+}
+
 User.findByEmailAddress = function (email, result) {
   connection.query('SELECT * FROM users_table WHERE email = ?', email, function (err, res) {
     if (err) {

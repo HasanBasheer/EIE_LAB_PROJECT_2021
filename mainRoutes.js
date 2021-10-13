@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const mainRouter = express.Router()
 const userController = require('./controllers/user.controller.js')
+const searchController = require('./controllers/search.controller.js')
 const { body, validationResult } = require('express-validator')
 const session = require('express-session')
 
@@ -43,5 +44,9 @@ mainRouter.get('/registration', function (req, res) {
 mainRouter.post('/user/', userController.createUser)
 
 mainRouter.get('/user/:emailAddress', userController.findByEmailAddress)
+
+// mainRouter.get('/user/:authtoken', userController.checkAuthToken)
+
+mainRouter.post('/createQuery', searchController.createQuery)
 
 module.exports = mainRouter
