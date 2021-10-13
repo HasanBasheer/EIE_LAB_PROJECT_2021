@@ -15,6 +15,17 @@
         <h1> Project Zeus Lightning Statistics</h1>
         <h3>Filter Options</h3>
         <div>
+            <label for="processReference">Process Reference: </label>
+            <input type="number" name="processReference" id="processReference" min="1" max="9999">
+        </div>
+        <div>
+            <label>Number of strokes in same channel: </label><br>
+            <input id="minNumStrokeSlider" type="range" min="0" max="99" value="0" oninput="minNumStrokeBox.value=minNumStrokeSlider.value">
+            <input id="minNumStrokeBox" type="number" value="0" min="0" max="99" name="minNumStroke" oninput="minNumStrokeSlider.value=minNumStrokeBox.value">
+            <input id="maxNumStrokeSlider" type="range" min="0" max="99" value="99" oninput="maxNumStrokeBox.value=maxNumStrokeSlider.value">
+            <input id="maxNumStrokeBox" type="number" value="99" min="0" max="99" name="maxNumStroke" oninput="maxNumStrokeSlider.value=maxNumStrokeBox.value">
+        </div>
+        <div>
             <label for="dateRange">Date:</label><br>
             <input type="date" id="dateRange" name="date" min="1000-01-01" max="9999-12-31"><br>
             <label for="timeRange">Time:</label><br>
@@ -34,6 +45,22 @@
             <label for="M">M</label><br>
             <input type="checkbox" id="attemptedLeader" name="processes_attemptedlead" value="Attempted Leader">
             <label for="attemptedLeader">Attempted Leader</label><br>
+            <input type="checkbox" id="spider" name="processes_spider" value="Spider">
+            <label for="spider">Spider</label><br>
+            <input type="checkbox" id="up" name="processes_up" value="up">
+            <label for="up">up</label><br>
+            <input type="checkbox" id="mup" name="processes_mup" value="M-up">
+            <label for="mup">M-up</label><br>
+            <input type="checkbox" id="srs" name="processes_srs" value="SRS">
+            <label for="srs">SRS</label><br>
+            <input type="checkbox" id="evant" name="processes_evant" value="Ev. Anterior">
+            <label for="evant">Ev. Anterior</label><br>
+            <input type="checkbox" id="evpost" name="processes_evpost" value="Ev. Posterior">
+            <label for="evpost">Ev. Posterior</label><br>
+            <input type="checkbox" id="cc" name="processes_cc" value="CC">
+            <label for="cc">CC</label><br>
+            <input type="checkbox" id="recoillead" name="processes_recoillead" value="Recoil Leader">
+            <label for="recoillead">Recoil Leader</label><br>
         </div>
         <div>
             <label>Visibility</label><br>

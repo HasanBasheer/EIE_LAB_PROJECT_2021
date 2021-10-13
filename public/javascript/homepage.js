@@ -3,6 +3,67 @@ $(document).ready(function () {
   $('#logout').click(function () {
     window.location.href = '/'
   })
+
+  $('#minNumStrokeSlider').change(function () {
+    const $this = $(this)
+    if ($this.val() >= $('#maxNumStrokeSlider').val()) {
+      $('#maxNumStrokeSlider').val($this.val())
+      $('#maxNumStrokeBox').val($this.val())
+    }
+  })
+  $('#maxNumStrokeSlider').change(function () {
+    const $this = $(this)
+    if ($this.val() <= $('#minNumStrokeSlider').val()) {
+      $('#minNumStrokeSlider').val($this.val())
+      $('#minNumStrokeBox').val($this.val())
+    }
+  })
+
+  $('#minMsTimeSlider').change(function () {
+    const $this = $(this)
+    if ($this.val() >= $('#maxMsTimeSlider').val()) {
+      $('#maxMsTimeSlider').val($this.val())
+      $('#maxMsTimeBox').val($this.val())
+    }
+  })
+  $('#maxMsTimeSlider').change(function () {
+    const $this = $(this)
+    if ($this.val() <= $('#minMsTimeSlider').val()) {
+      $('#minMsTimeSlider').val($this.val())
+      $('#minMsTimeBox').val($this.val())
+    }
+  })
+
+  $('#minstrikepoint').change(function () {
+    const $this = $(this)
+    if ($this.val() >= $('#maxstrikepoint').val()) {
+      $('#maxstrikepoint').val($this.val())
+      $('#maxstrikepointbox').val($this.val())
+    }
+  })
+  $('#maxstrikepoint').change(function () {
+    const $this = $(this)
+    if ($this.val() <= $('#minstrikepoint').val()) {
+      $('#minstrikepoint').val($this.val())
+      $('#minstrikepointbox').val($this.val())
+    }
+  })
+
+  $('#minduration').change(function () {
+    const $this = $(this)
+    if ($this.val() >= $('#maxduration').val()) {
+      $('#maxduration').val($this.val())
+      $('#maxdurationbox').val($this.val())
+    }
+  })
+  $('#maxduration').change(function () {
+    const $this = $(this)
+    if ($this.val() <= $('#minduration').val()) {
+      $('#minduration').val($this.val())
+      $('#mindurationbox').val($this.val())
+    }
+  })
+
   $('#clearFilter').click(function () {
     $('#resultsContainer').empty()
     $('#resultsContainer').append('<tr><td>' + 'Flash_ID' + '</td><td>' + 'Process Reference' + '</td><td>' + 'Number of Strokes in same Channel' + '</td>' +
