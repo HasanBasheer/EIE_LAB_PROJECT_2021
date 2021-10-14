@@ -89,7 +89,7 @@ $(document).ready(function () {
       console.log('status: ' + status + ', data: ' + data)
       // $('#resultsContainer').empty()
       $.each(data, function (index, lightning) {
-        console.log(lightning)
+        // console.log(lightning)
         // alert(index + ': ' + value)
         $('#resultsContainer').append('<tr><td>' + lightning.flash_ID + '</td><td>' + lightning.process_reference + '</td><td>' + lightning.stroke_channel_num + '</td>' +
         '<td>' + new Date(lightning.process_day).toISOString().slice(0, 10) /* lightning.process_day */+ '</td>' + '<td>' + lightning.process_time + '</td>' + '<td>' + lightning.process_time_millisecond + '</span>' +

@@ -140,7 +140,7 @@ SearchObject.createQuery = function (searchObject, result) {
   }
   connection.query(searchQuery, searchParams, function (err, res) {
     if (err) {
-      console.log('Could not find user with email address ' + searchObject, err)
+      // console.log('Could not find user with email address ' + searchObject, err)
       result(null, null)
     } else {
       result(null, res)
