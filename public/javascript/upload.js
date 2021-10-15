@@ -1,14 +1,42 @@
 'use strict'
 
+/*
+const fs = require('fs').promises
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
+
+async function removeFile(fileName) {
+    await unlinkAsync('./upload/' + fileName)
+    return
+}
+*/
+
+//var files = event.target.files
+/*
+function getExtension(filename) {
+    var parts = filename.split('.')
+    return parts[parts.length - 1]
+}
+
+function isExcel(filename) {
+    var ext = getExtension(filename)
+    if (ext.toLowerCase() === 'xlsx') {
+        return true
+    }
+    return false
+}
+*/
+
 let complete = false;
 
 async function updateData() {
+
     console.log('data function')
     const res = await fetch('/updateData', {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             //blank
@@ -25,7 +53,39 @@ async function updateData() {
             duration: 12
             */
         })
-      }).catch((err) => console.log(err))
-      const data = await res.json()
-      complete = data.body
+    }).catch((err) => console.log(err))
+    const data = await res.json()
+    let updateDone = data.body
+    //console.log("upload.js part: " + updateDone)
+    if (updateDone === true) {
+        alert('Database has been purged and new data has been added')
+    } else {
+        alert('Update of database has failed. Please re-try file upload and try update again')
+    }
 }
+
+async function uploadData() {
+    //let complete = true //action="/upload"
+    //console.log('File im getting doc id = ' + getExtension(file))
+    var file = document.getElementById('fileInput').files.item(0).name
+
+    console.log("file check: " + isExcel(file))
+
+    const res = await fetch('/upload', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            //file_name: isExcel(file)
+        })
+    }).catch((err) => console.log(err))
+    const data = await res.json()
+    console.log(data.body)
+}
+
+if (complete === true) {
+    alert('File has been uploaded successfully')
+}
+

@@ -37,6 +37,11 @@ mainRouter.get('/registration', function (req, res) {
 mainRouter.get('/homepage', isLoggedIn, function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'homepage.html'))
 })
+
+mainRouter.get('/upload', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views', 'upload.html'))
+})
+
 /*
 mainRouter.get('/uploadData', isLoggedIn, function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'upload.html'))

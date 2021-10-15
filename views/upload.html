@@ -7,13 +7,13 @@
 </head>
 
 <body>
-	<form method="post" action="/upload" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data">
 		<div>
 			<label>Select your file to upload</label>
-			<input type="file" name="upload"/>
+			<input id="fileInput" type="file" name="upload"/>
 		</div>
 		<div>
-			<input type="submit" name="btn_upload_file" value="Upload"/>
+			<input type="submit" name="btn_upload_file" value="Upload" onclick="return uploadData()"/>
 		</div>
 	</form>
 	<div>
