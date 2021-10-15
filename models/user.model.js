@@ -19,8 +19,8 @@ User.checkAuthToken = function (authtoken, result) {
       console.log('Invalid Authentication Token', err)
       result(null, null)
     } else {
-      result(null, res)
       connection.query('DELETE FROM tokens_table WHERE token = ?', authtoken)
+      result(null, res)
     }
   })
 }
