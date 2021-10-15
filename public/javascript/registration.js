@@ -17,7 +17,7 @@ $(document).ready(function () {
     valid = valid && checkLength(email, 'Email', 6, 80)
     valid = valid && checkLength(password, 'Password', 5, 20)
 
-    valid = valid && checkRegexp(email, emailRegex, 'eg. jack@gmail.ac.za')
+    valid = valid && checkRegexp(email, emailRegex, 'eg. john@email.com')
     valid = valid && checkRegexp(password, /^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/, 'Password requires one uppercase letter, one lowercase letter, one number and one special character')
     if (!valid) {
       return
@@ -32,6 +32,7 @@ $(document).ready(function () {
     $.post('/user', formData)
       .fail(function (err) {
         console.log('Registration Failed')
+        alert(err.responseJSON.message)
         throw err
       })
       .done(function () {
@@ -42,7 +43,16 @@ $(document).ready(function () {
 
   function checkLength (o, n, min, max) {
     if (o.val().length > max || o.val().length < min) {
-      console.log('Password length')
+      console.log('Field Length(s) Invalid')
+      if (n == 'First Name' || n == 'Last Name') {
+        alert('error: ' + n + ' must be between 2 and 20 characters')
+      }
+      if (n == 'Email') {
+        alert('error: ' + n + ' must be between 6 and 80')
+      }
+      if (n == 'Password') {
+        alert('error: ' + n + ' must be between 5 and 20')
+      }
       return false
     } else {
       return true
@@ -52,6 +62,11 @@ $(document).ready(function () {
   function checkRegexp (o, regexp, n) {
     if (!(regexp.test(o.val()))) {
       console.log('regex fail')
+      if (o == email) {
+        alert('error: Email must be a valid email format ' + n)
+      } else {
+        alert('error: Password requires one uppercase letter, one lowercase letter, one number and one special character')
+      }
       return false
     } else {
       return true

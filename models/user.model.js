@@ -20,6 +20,7 @@ User.checkAuthToken = function (authtoken, result) {
       result(null, null)
     } else {
       result(null, res)
+      connection.query('DELETE FROM tokens_table WHERE token = ?', authtoken)
     }
   })
 }
@@ -40,7 +41,9 @@ User.create = function (newUser, result) { // do validations and throw exception
     if (res && res.length > 0) {
       console.log('error: Email address already in use ' + newUser.email, err)
       result('error: Email address already in use ' + newUser.email, null)
+      // alert('Email address ' + newUser.email + ' already in use')
       return
+      // res.JSON({ body: 'Email already in use' })
     }
     const password = newUser.password
     newUser.password = bcrypt.hashSync(newUser.password, saltRounds)
