@@ -6,7 +6,14 @@ const fs = require('fs')
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
 
+async function removeFile(fileName) {
+    await unlinkAsync('./upload/' + fileName)
+    return
+}
+
+
 var deleteData = false
+var updateData = false
 
 let process_day = ''
 let process_time = ''
@@ -82,10 +89,8 @@ exports.createData = function (req, res) {
                 duration
             }
             //validate new entries
-            connection.close
-            connection.open
             connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
-                console.log(res)
+                //console.log(res)
                 if (err) {
                     console.log('Error: Not Found')
                     console.log('error: ', err)
@@ -96,14 +101,19 @@ exports.createData = function (req, res) {
                             console.log('error: ', err)
                             res(err, null)
                         }
+                            connection.release
                     })
                 }
             })
         }
-        console.log('Database new data has been added')
-        let done = true
-        res.json({ body: done })
-        //unlinkAsync('./upload/' + fileName)
+        updateData = true
+        console.log(updateData)
+        if(updateData === true)
+        {
+            console.log('Database new data has been added')
+            removeFile(fileName)
+            res.json({ body: updateData })
+        }
     } else {
         console.log("File name is empty. Please upload a file")
         //res.json({ body: "empty file name" })
