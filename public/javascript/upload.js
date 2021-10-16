@@ -26,6 +26,10 @@ function isExcel(filename) {
     return false
 }
 */
+function dragOverHandler(ev){
+    console.log('File in drop zone')
+    ev.preventDefault()
+}
 
 let complete = false;
 
@@ -58,7 +62,7 @@ async function updateData() {
     let updateDone = data.body
     //console.log("upload.js part: " + updateDone)
     if (updateDone === true) {
-        alert('Database has been purged and new data has been added')
+        alert('Database new data has been added')
     } else {
         alert('Update of database has failed. Please re-try file upload and try update again')
     }
@@ -87,5 +91,27 @@ async function uploadData() {
 
 if (complete === true) {
     alert('File has been uploaded successfully')
+}
+
+async function deleteData() {
+    const res = await fetch('/updateData/purge', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            //no send
+        })
+    }).catch((err) => console.log(err))
+    const deleteData = await res.json()
+    console.log(deleteData.body)
+
+    if(deleteData.body === true)
+    {
+        alert('Database has been cleared successfully')
+    }else{
+        alert('Could not clear database')
+    }
 }
 

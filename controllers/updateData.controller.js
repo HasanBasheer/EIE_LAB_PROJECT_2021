@@ -6,6 +6,8 @@ const fs = require('fs')
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
 
+var deleteData = false
+
 let process_day = ''
 let process_time = ''
 let process_time_millisecond = ''
@@ -53,61 +55,79 @@ exports.createData = function (req, res) {
             d = rows.map(d => d[16])
         })
 
-        connection.query('DELETE FROM flash_table WHERE flash_ID > 0', function (err, res) {
-            if (err) {
-                console.log('error: ', err)
-                res(err, null)
-            } else {
-                connection.query('ALTER TABLE flash_table AUTO_INCREMENT = 1', function (err, res) {
-                    if (err) {
-                        console.log('error: ', err)
-                        res(err, null)
-                    } else {
-                        console.log('Database has been purged and new data has been added')
-                        //'./HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
-                        for (let x = 1; x < pr.length; x++) {
-                            //const newLightning = new Lightning(req.body)
-                            process_reference = pr[x]
-                            stroke_channel_num = scn[x]
-                            process = p[x]
-                            strike_point = sp[x]
-                            polarity = pol[x]
-                            visibility = v[x]
-                            duration = d[x]
-                            process_day = py[x] + '-' + pm[x] + '-' + pd[x]
-                            process_time = ph[x] + ':' + pmin[x] + ':' + ps[x]
-                            process_time_millisecond = pmilli[x]
+        //'./HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
+        for (let x = 1; x < pr.length; x++) { //pr.length
+            //const newLightning = new Lightning(req.body)
+            process_reference = pr[x]
+            stroke_channel_num = scn[x]
+            process = p[x]
+            strike_point = sp[x]
+            polarity = pol[x]
+            visibility = v[x]
+            duration = d[x]
+            process_day = py[x] + '-' + pm[x] + '-' + pd[x]
+            process_time = ph[x] + ':' + pmin[x] + ':' + ps[x]
+            process_time_millisecond = pmilli[x]
 
-                            const newLightning = {
-                                process_reference,
-                                stroke_channel_num,
-                                process_day,
-                                process_time,
-                                process,
-                                process_time_millisecond,
-                                strike_point,
-                                polarity,
-                                visibility,
-                                duration
-                            }
-                            connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
-                                if (err) {
-                                    console.log('error: ', err)
-                                    res(err, null)
-                                }
-                            })
-                        }
-                    }
-                })
+            const newLightning = {
+                process_reference,
+                stroke_channel_num,
+                process_day,
+                process_time,
+                process,
+                process_time_millisecond,
+                strike_point,
+                polarity,
+                visibility,
+                duration
             }
-        })
-        console.log('Finish Upload - controller')
+            //validate new entries
+            connection.close
+            connection.open
+            connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
+                console.log(res)
+                if (err) {
+                    console.log('Error: Not Found')
+                    console.log('error: ', err)
+                    //res(err, null)
+                } else if (!res.length) {
+                    connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
+                        if (err) {
+                            console.log('error: ', err)
+                            res(err, null)
+                        }
+                    })
+                }
+            })
+        }
+        console.log('Database new data has been added')
         let done = true
-        res.json({body: done})
+        res.json({ body: done })
         //unlinkAsync('./upload/' + fileName)
     } else {
         console.log("File name is empty. Please upload a file")
         //res.json({ body: "empty file name" })
     }
+}
+
+exports.deleteData = function (req, res) {
+    connection.query('DELETE FROM flash_table WHERE flash_ID > 0', function (err, res) {
+        if (err) {
+            console.log('error: ', err)
+            res(err, null)
+        } else {
+            connection.query('ALTER TABLE flash_table AUTO_INCREMENT = 1', function (err, res) {
+                if (err) {
+                    console.log('error: ', err)
+                    res(err, null)
+                } else {
+                    deleteData = true
+                }
+            })
+        }
+    })
+    deleteData = true
+    console.log('Database cleared?: ' + deleteData)
+    res.json({ body: deleteData })
 }
 

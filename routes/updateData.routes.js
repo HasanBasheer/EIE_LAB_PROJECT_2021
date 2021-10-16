@@ -22,4 +22,8 @@ router.post('/', (req, res) => {
     updateDataController.createData(req, res)
 })
 
+router.post('/purge', (req, res) => {
+  updateDataController.deleteData(req, res)
+})
+
 module.exports = router

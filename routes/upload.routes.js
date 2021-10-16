@@ -32,8 +32,8 @@ router.post('/', (req, res) => {
             else if (err) {
                 return res.send(err)
             }
-            res.sendFile(path.join(__dirname, '../views', './upload.html'))
-            //res.sendFile('../views/upload.html')
+            //res.sendFile(path.join(__dirname, '../views', './upload.html'))
+            res.send('File has been successfully uploaded')
         })
 })
 
