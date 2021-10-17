@@ -1,5 +1,6 @@
 'use strict'
 const User = require('../models/user.model.js')
+// const Token = require('../models/token.model.js')
 const { body } = require('express-validator')
 const { validationResult } = require('express-validator')
 
@@ -43,7 +44,7 @@ exports.createUser = function (req, res) {
     res.status(422).json({ errors: errors.array() })
     return
   }
-  const newUser = new User(req.body)
+
   // handles null error
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res
@@ -56,16 +57,28 @@ exports.createUser = function (req, res) {
     return
   }
 
-  User.create(newUser, function (err, user) {
-    if (err) {
-      res.status(400).send({ error: true, message: err })
+  User.checkAuthToken(req.body.authtoken, function (errToken, tokenResult) {
+    if (errToken) {
+      res.status(400).send({ error: true, message: errToken })
       return
     }
-    res.json({
-      error: false,
-      message:
-        'User with email address ' + newUser.email + ' added successfully!',
-      data: user
+    console.log(tokenResult)
+    if (!tokenResult || tokenResult.length <= 0) {
+      res.status(400).send({ error: true, message: 'Invalid token' })
+      return
+    }
+    const newUser = new User(req.body)
+    User.create(newUser, function (err, user) {
+      if (err) {
+        res.status(400).send({ error: true, message: err })
+        return
+      }
+      res.json({
+        error: false,
+        message:
+          'User with email address ' + newUser.email + ' added successfully!',
+        data: user
+      })
     })
   })
 }

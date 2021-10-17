@@ -13,6 +13,19 @@ const User = function (user) {
   this.password = user.password
 }
 
+User.checkAuthToken = function (authtoken, result) {
+  connection.query('SELECT * FROM tokens_table WHERE token = ?', authtoken, function (err, res) {
+    if (err) {
+      console.log('Invalid Authentication Token', err)
+      result(null, null)
+    } else {
+      connection.query('DELETE FROM tokens_table WHERE token = ?', authtoken)
+      result(null, res)
+    }
+  })
+  connection.release
+}
+
 User.findByEmailAddress = function (email, result) {
   connection.query('SELECT * FROM users_table WHERE email = ?', email, function (err, res) {
     if (err) {
@@ -22,6 +35,7 @@ User.findByEmailAddress = function (email, result) {
       result(null, res)
     }
   })
+  connection.release
 }
 
 User.create = function (newUser, result) { // do validations and throw exceptions
@@ -29,7 +43,9 @@ User.create = function (newUser, result) { // do validations and throw exception
     if (res && res.length > 0) {
       console.log('error: Email address already in use ' + newUser.email, err)
       result('error: Email address already in use ' + newUser.email, null)
+      // alert('Email address ' + newUser.email + ' already in use')
       return
+      // res.JSON({ body: 'Email already in use' })
     }
     const password = newUser.password
     newUser.password = bcrypt.hashSync(newUser.password, saltRounds)
@@ -41,6 +57,7 @@ User.create = function (newUser, result) { // do validations and throw exception
         result(null, res.insertId)
       }
     })
+    connection.release
   })
 }
 
