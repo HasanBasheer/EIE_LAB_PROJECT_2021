@@ -94,24 +94,33 @@ if (complete === true) {
 }
 
 async function deleteData() {
-    const res = await fetch('/updateData/purge', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            //no send
-        })
-    }).catch((err) => console.log(err))
-    const deleteData = await res.json()
-    console.log(deleteData.body)
 
-    if(deleteData.body === true)
-    {
-        alert('Database has been cleared successfully')
-    }else{
-        alert('Could not clear database')
+    var result = confirm('Are you sure you want to clear the database?')
+    if(result){
+        const res = await fetch('/updateData/purge', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                //no send
+            })
+        }).catch((err) => console.log(err))
+        const deleteData = await res.json()
+        console.log(deleteData.body)
+    
+        if(deleteData.body === true){
+            alert('Database has been cleared successfully')
+        }else{
+            alert('Could not clear database')
+        }
     }
+}
+
+async function changeOver(){
+    window.location.href = '/homepage'
+
+   // location.assign('/homepage')
 }
 
