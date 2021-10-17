@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Excel File Upload</title>
+	<script src="javascript/upload.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="/css/upload.css">
+</head>
+
+<body>
+	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+		<p>Drag the file to this Drop Zone ...</p>
+	</div>
+</body>
+
+<body>
+	<form method="post" enctype="multipart/form-data">
+		<div>
+			<label>Select your file to upload</label>
+			<input id="fileInput" type="file" name="upload"/>
+		</div>
+		<div>
+			<input type="submit" name="btn_upload_file" value="Upload" onclick="return uploadData()"/>
+		</div>
+	</form>
+	<div>
+		<button id="Data" type="submit" onclick="return updateData()">Update Data</button>
+	</div>
+	<div>
+		<button id="Data" type="submit" onclick="return deleteData()">Clear Database</button>
+	</div>
+
+</body>
+
+</html>

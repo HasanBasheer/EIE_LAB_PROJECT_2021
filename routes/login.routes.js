@@ -11,9 +11,7 @@ mainRouter.post('/', function (req, result) {
   const password = req.body.password
   const obj = connection.escape(email)
 
-  connection.query(
-    'SELECT * FROM users_table WHERE email = ' + obj,
-    function (err, resp) {
+  connection.query('SELECT * FROM users_table WHERE email = ' + obj, function (err, resp) {
       if (err) {
         throw err
       } else if (resp[0] !== undefined) {
@@ -29,6 +27,7 @@ mainRouter.post('/', function (req, result) {
           } else {
             result.json({ body: false })
           }
+          connection.release
         })
       } else {
         result.json({ body: false })
