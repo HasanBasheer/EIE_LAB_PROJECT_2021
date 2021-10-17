@@ -146,6 +146,7 @@ SearchObject.createQuery = function (searchObject, result) {
       result(null, res)
     }
   })
+  connection.release
 }
 
 module.exports = SearchObject

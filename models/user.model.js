@@ -23,6 +23,7 @@ User.checkAuthToken = function (authtoken, result) {
       result(null, res)
     }
   })
+  connection.release
 }
 
 User.findByEmailAddress = function (email, result) {
@@ -34,6 +35,7 @@ User.findByEmailAddress = function (email, result) {
       result(null, res)
     }
   })
+  connection.release
 }
 
 User.create = function (newUser, result) { // do validations and throw exceptions
@@ -55,6 +57,7 @@ User.create = function (newUser, result) { // do validations and throw exception
         result(null, res.insertId)
       }
     })
+    connection.release
   })
 }
 

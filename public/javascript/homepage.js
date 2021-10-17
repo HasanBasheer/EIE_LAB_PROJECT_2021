@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  const resultsCount = $('#resultsContainer tr').length - 1
+  $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
   console.log('homepage ready')
   $('#logout').click(function () {
     window.location.href = '/'
@@ -66,12 +68,14 @@ $(document).ready(function () {
 
   $('#clearFilter').click(function () {
     $('#resultsContainer').empty()
-    $('#resultsContainer').append('<tr><td>' + 'Flash_ID' + '</td><td>' + 'Process Reference' + '</td><td>' + 'Number of Strokes in same Channel' + '</td>' +
-    '<td>' + 'Date (YYYY-MM-DD)' + '</td>' + '<td>' + 'Time (HH:MM:SS)' + '</td>' + '<td>' + ' Time (ms)' + '</td>' +
-    '<td>' + 'Process' + '</td>' + '<td>' + 'Strike Point' + '</td>' + '<td>' + 'Polarity' + '</td>' + '<td>' + 'Visibility' + '</td>' +
-    '<td>' + 'Duration (ms)' + '</td>' +
+    $('#resultsContainer').append('<tr><td>' + '<b>Flash_ID</b>' + '</td><td>' + '<b>Process Reference</b>' + '</td><td>' + '<b>Number of Strokes in same Channel</b>' + '</td>' +
+    '<td>' + '<b>Date (YYYY-MM-DD)</b>' + '</td><td>' + '<b>Time (HH:MM:SS)</b>' + '</td><td>' + '<b>Time (ms)</b>' + '</td><td>' + '<b>Process</b>' + '</td><td>' + '<b>Strike Point</b>' +
+    '</td><td>' + '<b>Polarity</b>' + '</td><td>' + '<b>Visibility</b>' + '</td><td>' + '<b>Duration (ms)</b>' + '</td>' +
     '</tr>')
     $('#numResultsContainer').empty()
+    const resultsCount = $('#resultsContainer tr').length - 1
+    $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
+    $('#numResultsContainer').append('<h2>Results Table</h2>')
   })
   $('#filterButton').click(function () {
     const formData = {}
@@ -100,7 +104,8 @@ $(document).ready(function () {
       })
       $('#numResultsContainer').empty()
       const resultsCount = $('#resultsContainer tr').length - 1
-      $('#numResultsContainer').append('<label> Number of Results: ' + resultsCount + '</label>')
+      $('#numResultsContainer').append('<h2>Results Table</h2>')
+      $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
     })
   })
 })
