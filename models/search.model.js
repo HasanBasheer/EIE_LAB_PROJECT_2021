@@ -34,7 +34,7 @@ SearchObject.createQuery = function (searchObject, result) {
   // console.log(searchObject)
   // res(null, [])
   const searchParams = []
-  let searchQuery = 'SELECT * FROM lightning_data WHERE 1 = 1'
+  let searchQuery = 'SELECT * FROM flash_table WHERE 1 = 1'
   if (searchObject.processReference) {
     searchQuery += ' and process_reference = ?'
     searchParams.push(searchObject.processReference)

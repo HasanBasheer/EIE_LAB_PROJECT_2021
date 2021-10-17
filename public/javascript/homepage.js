@@ -1,6 +1,6 @@
 $(document).ready(function () {
   const resultsCount = $('#resultsContainer tr').length - 1
-  $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
+  $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
   console.log('homepage ready')
   $('#logout').click(function () {
     window.location.href = '/'
@@ -74,7 +74,7 @@ $(document).ready(function () {
     '</tr>')
     $('#numResultsContainer').empty()
     const resultsCount = $('#resultsContainer tr').length - 1
-    $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
+    $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
     $('#numResultsContainer').append('<h2>Results Table</h2>')
   })
   $('#filterButton').click(function () {
@@ -105,7 +105,7 @@ $(document).ready(function () {
       $('#numResultsContainer').empty()
       const resultsCount = $('#resultsContainer tr').length - 1
       $('#numResultsContainer').append('<h2>Results Table</h2>')
-      $('#numResultsContainer').append('<label>Number of Results: ' + resultsCount + '</label>')
+      $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
     })
   })
 })

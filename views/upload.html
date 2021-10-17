@@ -7,28 +7,35 @@
 	<link rel="stylesheet" href="/css/upload.css">
 </head>
 
-<body>
+<!-- <body>
 	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
 		<p>Drag the file to this Drop Zone ...</p>
 	</div>
-</body>
+</body> -->
 
 <body>
 	<form method="post" enctype="multipart/form-data">
 		<div>
-			<label>Select your file to upload</label>
-			<input id="fileInput" type="file" name="upload"/>
+			<label><b>Select your file to upload</b></label>
+			<input id="fileInput" type="file" name="upload" />
 		</div>
 		<div>
-			<input type="submit" name="btn_upload_file" value="Upload" onclick="return uploadData()"/>
+			<input type="submit" name="btn_upload_file" value="Upload" onclick="return uploadData()" />
 		</div>
 	</form>
-	<div>
-		<button id="Data" type="submit" onclick="return updateData()">Update Data</button>
-	</div>
-	<div>
-		<button id="Data" type="submit" onclick="return deleteData()">Clear Database</button>
-	</div>
+	<form>
+		<div>
+			<button id="Data" type="submit" onclick="return updateData()">Update Data</button>
+		</div>
+		<div>
+			<button id="Data" type="submit" onclick="return deleteData()">Clear Database</button>
+		</div>
+		<div>
+			<!-- <button type="submit" value="return" onclick="history.back()">Return</button> -->
+			<input type="button" value="Return" onclick="history.back()">
+		</div>
+
+	</form>
 
 </body>
 

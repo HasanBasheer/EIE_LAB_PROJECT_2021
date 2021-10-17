@@ -37,7 +37,12 @@ $(document).ready(function () {
       })
       .done(function () {
         console.log('Registration Succeeded')
-        $('#proceedToLoginBtn').show()
+        var reg = confirm("Registration Successful. Would you like to return to login?")
+        if(reg)
+        {
+          window.location.href = '/'
+        }
+        // $('#proceedToLoginBtn').show()
       })
   })
 
