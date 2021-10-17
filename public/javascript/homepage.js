@@ -71,6 +71,7 @@ $(document).ready(function () {
     '<td>' + 'Process' + '</td>' + '<td>' + 'Strike Point' + '</td>' + '<td>' + 'Polarity' + '</td>' + '<td>' + 'Visibility' + '</td>' +
     '<td>' + 'Duration (ms)' + '</td>' +
     '</tr>')
+    $('#numResultsContainer').empty()
   })
   $('#filterButton').click(function () {
     const formData = {}
@@ -97,6 +98,9 @@ $(document).ready(function () {
         '<td>' + lightning.duration + '</td>' +
         '</tr>')
       })
+      $('#numResultsContainer').empty()
+      const resultsCount = $('#resultsContainer tr').length - 1
+      $('#numResultsContainer').append('<label> Number of Results: ' + resultsCount + '</label>')
     })
   })
 })

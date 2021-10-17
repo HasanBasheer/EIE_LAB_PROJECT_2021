@@ -20,8 +20,10 @@
         </div>
         <div>
             <label>Number of strokes in same channel: </label><br>
+            <label for="minNumStrokeSlider">Min: </label>
             <input id="minNumStrokeSlider" type="range" min="0" max="99" value="0" oninput="minNumStrokeBox.value=minNumStrokeSlider.value">
-            <input id="minNumStrokeBox" type="number" value="0" min="0" max="99" name="minNumStroke" oninput="minNumStrokeSlider.value=minNumStrokeBox.value">
+            <input id="minNumStrokeBox" type="number" value="0" min="0" max="99" name="minNumStroke" oninput="minNumStrokeSlider.value=minNumStrokeBox.value"><br>
+            <label for="maxNumStrokeSlider">Max: </label>
             <input id="maxNumStrokeSlider" type="range" min="0" max="99" value="99" oninput="maxNumStrokeBox.value=maxNumStrokeSlider.value">
             <input id="maxNumStrokeBox" type="number" value="99" min="0" max="99" name="maxNumStroke" oninput="maxNumStrokeSlider.value=maxNumStrokeBox.value">
         </div>
@@ -31,8 +33,10 @@
             <label for="timeRange">Time:</label><br>
             <input type="time" id="timeRange" name="time" min="00:00" max="23:59" step="2" required> <br>
             <label>Milliseconds: </label><br>
+            <label for="minMsTimeSlider">Min: </label>
             <input id="minMsTimeSlider" type="range" min="0" max="999" value="0" oninput="minMsTimeBox.value=minMsTimeSlider.value">
-            <input id="minMsTimeBox" type="number" value="0" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value">
+            <input id="minMsTimeBox" type="number" value="0" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value"><br>
+            <label for="maxMsTimeSlider">Max: </label>
             <input id="maxMsTimeSlider" type="range" min="0" max="999" value="999" oninput="maxMsTimeBox.value=maxMsTimeSlider.value">
             <input id="maxMsTimeBox" type="number" value="999" min="0" max="999" name="maxMsTime" oninput="maxMsTimeSlider.value=maxMsTimeBox.value">
         </div>
@@ -98,6 +102,9 @@
             <label for="negative">Negative</label><br>
             <input type="checkbox" id="unclassified" name="polarities_wc" value="without classification">
             <label for="unclassified">Without Classfication</label><br>
+        </div>
+        <div id="numResultsContainer">
+            <h2>Results Table: </h2>
         </div>
         <table id="resultsContainer">
             <tr><td> Flash_ID </td><td> Process Reference </td><td> Number of Strokes in same Channel </td>
