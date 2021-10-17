@@ -62,7 +62,7 @@ async function updateData() {
     let updateDone = data.body
     //console.log("upload.js part: " + updateDone)
     if (updateDone === true) {
-        alert('Database new data has been added')
+        alert('New data entries have been added')
     } else {
         alert('Update of database has failed. Please re-try file upload and try update again')
     }

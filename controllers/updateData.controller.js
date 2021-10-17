@@ -11,7 +11,6 @@ async function removeFile(fileName) {
     return
 }
 
-
 var deleteData = false
 var updateData = false
 
@@ -44,7 +43,7 @@ let d = []
 exports.createData = function (req, res) {
     let fileName = fs.readdirSync('./upload/')
     console.log('The files path is: ' + fileName)
-    if (fileName) {
+    if (fileName.length != 0) {
         xlsxFile('./upload/' + fileName).then((rows) => { //'../EIE_LAB_PROJECT_2021/upload/Data.xlsx'
             pr = rows.map(d => d[0])
             scn = rows.map(d => d[1])
@@ -101,14 +100,16 @@ exports.createData = function (req, res) {
                             console.log('error: ', err)
                             res(err, null)
                         }
-                            connection.release
+                        connection.release
                     })
                 }
             })
         }
         updateData = true
         console.log(updateData)
-        if(updateData === true)
+        fileName = fs.readdirSync('./upload/')
+        console.log('File name is: ' + fileName.length)
+        if((updateData == true) && (fileName.length != 0))
         {
             console.log('Database new data has been added')
             removeFile(fileName)
@@ -116,7 +117,8 @@ exports.createData = function (req, res) {
         }
     } else {
         console.log("File name is empty. Please upload a file")
-        //res.json({ body: "empty file name" })
+        updateData = false
+        res.json({ body: updateData })
     }
 }
 
@@ -132,6 +134,7 @@ exports.deleteData = function (req, res) {
                     res(err, null)
                 } else {
                     deleteData = true
+                    connection.release
                 }
             })
         }
