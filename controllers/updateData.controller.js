@@ -62,6 +62,7 @@ exports.createData = function (req, res) {
         })
 
         //'./HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
+        console.log('No. of entries: ' + pr.length)
         for (let x = 1; x < pr.length; x++) { //pr.length
             //const newLightning = new Lightning(req.body)
             process_reference = pr[x]
