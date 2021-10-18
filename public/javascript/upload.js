@@ -1,5 +1,9 @@
 'use strict'
 
+//const fetchButton = document.querySelector('#updateButton')
+//const loader = document.querySelector('#loader')
+//const content = document.querySelector('#content')
+
 /*
 const fs = require('fs').promises
 const { promisify } = require('util')
@@ -61,19 +65,32 @@ async function updateData() {
     const data = await res.json()
     let updateDone = data.body
     //console.log("upload.js part: " + updateDone)
+    
     if (updateDone === true) {
         alert('New data entries have been added')
     } else {
         alert('Update of database has failed. Please re-try file upload and try update again')
     }
+    
 }
 
+/*
+fetchButton.onclick() = async function () {
+    content.innerHTML = ''
+
+    loader.style.display = 'block'
+    const nextContent = await updateData()
+    loader.style.display = 'none'
+
+    content.innerHTML = 'Update Complete'
+}
+*/
 async function uploadData() {
     //let complete = true //action="/upload"
     //console.log('File im getting doc id = ' + getExtension(file))
     var file = document.getElementById('fileInput').files.item(0).name
 
-    console.log("file check: " + isExcel(file))
+    //console.log("file check: " + isExcel(file))
 
     const res = await fetch('/upload', {
         method: 'POST',

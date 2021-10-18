@@ -44,7 +44,7 @@ exports.createData = function (req, res) {
     let fileName = fs.readdirSync('./upload/')
     console.log('The files path is: ' + fileName)
     if (fileName.length != 0) {
-        xlsxFile('./upload/' + fileName).then((rows) => { //'../EIE_LAB_PROJECT_2021/upload/Data.xlsx'
+        xlsxFile('./upload/' + fileName, { sheet: 'HS_data' }).then((rows) => { //'../EIE_LAB_PROJECT_2021/upload/Data.xlsx'
             pr = rows.map(d => d[0])
             scn = rows.map(d => d[1])
             py = rows.map(d => d[4])
@@ -105,8 +105,8 @@ exports.createData = function (req, res) {
                     })
                 }
             })
+            updateData = true
         }
-        updateData = true
         console.log(updateData)
         fileName = fs.readdirSync('./upload/')
         console.log('File name is: ' + fileName.length)
