@@ -34,7 +34,7 @@ const SearchObject = function (searchObject) {
 }
 
 SearchObject.createQuery = function (searchObject, result) {
-  console.log(searchObject)
+  // console.log(searchObject)
   // res(null, [])
   const searchParams = []
   let searchQuery = 'SELECT * FROM flash_table WHERE 1 = 1'
