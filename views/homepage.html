@@ -95,6 +95,14 @@
                 <input type="checkbox" id="recoillead" name="processes_recoillead" value="Recoil Leader">
                 <label for="recoillead">Recoil Leader</label>
             </div>
+            <div>
+                <input type="checkbox" id="processes_srsm" name="processes_srsm" value="SRS-M">
+                <label for="processes_srsm">SRS-M</label>
+            </div>
+            <div>
+                <input type="checkbox" id="processes_wc" name="processes_wc" value="Without Classfication">
+                <label for="processes_wc">Without Classfication</label>
+            </div>
             </div>
         </div>
         <div>
@@ -135,18 +143,24 @@
             <label id="lblPolarity">Polarity: </label><br>
             <div id="polaritiesContainer">
                 <div>
-                <input type="checkbox" id="positive" name="polarities_positive" value="positive">
-                <label for="positive">Positive</label>
-            </div>
-            <div>
-                <input type="checkbox" id="negative" name="polarities_negative" value="negative">
-                <label for="negative">Negative</label>
-            </div>
-            <div>
-                <input type="checkbox" id="unclassified" name="polarities_wc" value="without classification">
-                <label for="unclassified">Without Classfication</label>
-            </div>
+                    <input type="checkbox" id="positive" name="polarities_positive" value="positive">
+                    <label for="positive">Positive</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="negative" name="polarities_negative" value="negative">
+                    <label for="negative">Negative</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="unclassified" name="polarities_wc" value="without classification">
+                    <label for="unclassified">Without Classfication</label>
+                </div>
             </div>  
+        </div>
+        <div id="includeContainer">
+            <div>
+                <input type="checkbox" id="includeNull" name="includeNull" value="">
+                <label for="lblincludeNull"><b>Include null values?</b></label>
+            </div>
         </div>
     </section>
     <section id="resultsSection">
