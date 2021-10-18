@@ -39,7 +39,7 @@ SearchObject.createQuery = function (searchObject, result) {
   const searchParams = []
   let searchQuery = 'SELECT * FROM flash_table WHERE 1 = 1'
 
-  if (searchObject.includeNull == 'true') {
+  if (searchObject.includeNull === 'true') {
     if (searchObject.processReference) {
       searchQuery += ' and process_reference = ? or process_reference is null'
       searchParams.push(searchObject.processReference)
