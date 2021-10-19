@@ -40,25 +40,26 @@ let v = []
 let d = []
 
 exports.createData = function (req, res) {
-  let fileName = fs.readdirSync('./upload/')
-  console.log('The files path is: ' + fileName)
-  if (fileName.length != 0) {
-    xlsxFile('./upload/' + fileName, { sheet: 'HS_data' }).then((rows) => { // '../EIE_LAB_PROJECT_2021/upload/Data.xlsx'
-      pr = rows.map(d => d[0])
-      scn = rows.map(d => d[1])
-      py = rows.map(d => d[4])
-      pm = rows.map(d => d[5])
-      pd = rows.map(d => d[6])
-      ph = rows.map(d => d[7])
-      pmin = rows.map(d => d[8])
-      ps = rows.map(d => d[9])
-      pmilli = rows.map(d => d[10])
-      p = rows.map(d => d[11])
-      sp = rows.map(d => d[12])
-      pol = rows.map(d => d[13])
-      v = rows.map(d => d[15])
-      d = rows.map(d => d[16])
-    })
+    //const nullInclude = req.body.nullData
+    let fileName = fs.readdirSync('./upload/')
+    console.log('The files path is: ' + fileName)
+    if (fileName.length != 0) {
+        xlsxFile('./upload/' + fileName, { sheet: 'HS_data' }).then((rows) => { //'../EIE_LAB_PROJECT_2021/upload/Data.xlsx'
+            pr = rows.map(d => d[0])
+            scn = rows.map(d => d[1])
+            py = rows.map(d => d[4])
+            pm = rows.map(d => d[5])
+            pd = rows.map(d => d[6])
+            ph = rows.map(d => d[7])
+            pmin = rows.map(d => d[8])
+            ps = rows.map(d => d[9])
+            pmilli = rows.map(d => d[10])
+            p = rows.map(d => d[11])
+            sp = rows.map(d => d[12])
+            pol = rows.map(d => d[13])
+            v = rows.map(d => d[15])
+            d = rows.map(d => d[16])
+        })
 
     // './HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
     // console.log('No. of entries: ' + pr.length)
@@ -87,33 +88,57 @@ exports.createData = function (req, res) {
         visibility,
         duration
       }
-      // validate new entries
-      connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
-        // console.log(res)
-        if (err) {
-          console.log('Error: Not Found')
-          console.log('error: ', err)
-          // res(err, null)
-        } else if (!res.length) {
-          connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
-            if (err) {
-              console.log('error: ', err)
-              res(err, null)
-            }
-            connection.release
-          })
+            //validate new entries
+            //console.log('Checkbox: ' + nullInclude)
+            // if (!nullInclude) {
+            //     if ((!process_reference) || (!stroke_channel_num) || (!process_day) || (!process_time) || (!process) || (!process_time_millisecond) || (!strike_point) || (!polarity) || (!visibility) || (!duration)) {
+
+            //     } else {
+            //         connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
+            //             //console.log(res)
+            //             if (err) {
+            //                 console.log('Error: Not Found')
+            //                 console.log('error: ', err)
+            //                 //res(err, null)
+            //             } else if (!res.length) {
+            //                 connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
+            //                     if (err) {
+            //                         console.log('error: ', err)
+            //                         res(err, null)
+            //                     }
+            //                     connection.release
+            //                 })
+            //             }
+            //         })
+            //     }
+            //     updateData = true
+            // }
+            connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
+                //console.log(res)
+                if (err) {
+                    console.log('Error: Not Found')
+                    console.log('error: ', err)
+                    //res(err, null)
+                } else if (!res.length) {
+                    connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
+                        if (err) {
+                            console.log('error: ', err)
+                            res(err, null)
+                        }
+                        connection.release
+                    })
+                }
+            })
+            updateData = true
         }
-      })
-    }
-    updateData = true
-    console.log(updateData)
-    fileName = fs.readdirSync('./upload/')
-    console.log('File name is: ' + fileName.length)
-    if ((updateData == true) && (fileName.length != 0)) {
-      console.log('Database new data has been added')
-      removeFile(fileName)
-      res.json({ body: updateData })
-    }
+
+        console.log(updateData)
+        fileName = fs.readdirSync('./upload/')
+        console.log('File name is: ' + fileName.length)
+        if ((updateData == true) && (fileName.length != 0)) {
+            console.log('Database new data has been added')
+            removeFile(fileName)
+            res.json({ body: updateData })
   } else {
     console.log('File name is empty. Please upload a file')
     updateData = false

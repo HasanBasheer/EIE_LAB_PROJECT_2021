@@ -1,5 +1,9 @@
 'use strict'
 
+//const fetchButton = document.querySelector('#updateButton')
+//const loader = document.querySelector('#loader')
+//const content = document.querySelector('#content')
+
 /*
 const fs = require('fs').promises
 const { promisify } = require('util')
@@ -34,6 +38,19 @@ function dragOverHandler(ev){
 let complete = false;
 
 async function updateData() {
+    /*
+    let nullDataSelect = document.getElementById('nullEntry')
+    console.log(nullDataSelect)
+    let nullInput
+
+    if(nullDataSelect === 'true')
+    {
+        nullInput = true
+    }else{
+        nullInput = false
+    }
+    */
+    //let nullData = false;
 
     console.log('data function')
     const res = await fetch('/updateData', {
@@ -43,6 +60,7 @@ async function updateData() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            //nullData: nullInput
             //blank
             /*
             process_reference: '1',
@@ -61,19 +79,32 @@ async function updateData() {
     const data = await res.json()
     let updateDone = data.body
     //console.log("upload.js part: " + updateDone)
+    
     if (updateDone === true) {
         alert('New data entries have been added')
     } else {
         alert('Update of database has failed. Please re-try file upload and try update again')
     }
+    
 }
 
+/*
+fetchButton.onclick() = async function () {
+    content.innerHTML = ''
+
+    loader.style.display = 'block'
+    const nextContent = await updateData()
+    loader.style.display = 'none'
+
+    content.innerHTML = 'Update Complete'
+}
+*/
 async function uploadData() {
     //let complete = true //action="/upload"
     //console.log('File im getting doc id = ' + getExtension(file))
     var file = document.getElementById('fileInput').files.item(0).name
 
-    console.log("file check: " + isExcel(file))
+    //console.log("file check: " + isExcel(file))
 
     const res = await fetch('/upload', {
         method: 'POST',
