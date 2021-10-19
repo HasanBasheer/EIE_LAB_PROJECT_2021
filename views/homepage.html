@@ -31,20 +31,25 @@
             </div>
         </div>
         <div>
-            <label id="lblDate" for="dateRange">Date:</label>
-            <input type="date" id="dateRange" name="date" min="1000-01-01" max="9999-12-31">
-            <label id="lblTime" for="timeRange">Time:</label>
-            <input type="time" id="timeRange" name="time" min="00:00" max="23:59" step="2" required>
+            <label id="lblDate">Date</label>
+            <div>
+                <label for="minDate">Min:</label>
+                <input type="date" id="minDate" name="minDate" min="1000-01-01" max="9999-12-31">
+                <label for="maxDate">Max:</label>
+                <input type="date" id="maxDate" name="maxDate" min="1000-01-01" max="9999-12-31">
+            </div>
+                <label id="lblTime" for="timeRange">Time:</label>
+                <input type="time" id="timeRange" name="time" min="00:00" max="23:59" step="2" required>
             <div>
             <label id="lblMilliseconds">Milliseconds: </label><br>
             <div>
-            <label for="minMsTimeSlider">Min: </label>
-            <input id="minMsTimeSlider" type="range" min="0" max="999" value="0" oninput="minMsTimeBox.value=minMsTimeSlider.value">
-            <input id="minMsTimeBox" type="number" value="0" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value"> 
-            <label for="maxMsTimeSlider">Max: </label>
-            <input id="maxMsTimeSlider" type="range" min="0" max="999" value="999" oninput="maxMsTimeBox.value=maxMsTimeSlider.value">
-            <input id="maxMsTimeBox" type="number" value="999" min="0" max="999" name="maxMsTime" oninput="maxMsTimeSlider.value=maxMsTimeBox.value">
-        </div>    
+                <label for="minMsTimeSlider">Min: </label>
+                <input id="minMsTimeSlider" type="range" min="0" max="999" value="0" oninput="minMsTimeBox.value=minMsTimeSlider.value">
+                <input id="minMsTimeBox" type="number" value="0" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value"> 
+                <label for="maxMsTimeSlider">Max: </label>
+                <input id="maxMsTimeSlider" type="range" min="0" max="999" value="999" oninput="maxMsTimeBox.value=maxMsTimeSlider.value">
+                <input id="maxMsTimeBox" type="number" value="999" min="0" max="999" name="maxMsTime" oninput="maxMsTimeSlider.value=maxMsTimeBox.value">
+            </div>    
         </div>
         </div>
         <h3>Characteristics</h3>
