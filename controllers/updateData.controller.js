@@ -41,6 +41,7 @@ let v = []
 let d = []
 
 exports.createData = function (req, res) {
+    //const nullInclude = req.body.nullData
     let fileName = fs.readdirSync('./upload/')
     console.log('The files path is: ' + fileName)
     if (fileName.length != 0) {
@@ -89,6 +90,30 @@ exports.createData = function (req, res) {
                 duration
             }
             //validate new entries
+            //console.log('Checkbox: ' + nullInclude)
+            // if (!nullInclude) {
+            //     if ((!process_reference) || (!stroke_channel_num) || (!process_day) || (!process_time) || (!process) || (!process_time_millisecond) || (!strike_point) || (!polarity) || (!visibility) || (!duration)) {
+
+            //     } else {
+            //         connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
+            //             //console.log(res)
+            //             if (err) {
+            //                 console.log('Error: Not Found')
+            //                 console.log('error: ', err)
+            //                 //res(err, null)
+            //             } else if (!res.length) {
+            //                 connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
+            //                     if (err) {
+            //                         console.log('error: ', err)
+            //                         res(err, null)
+            //                     }
+            //                     connection.release
+            //                 })
+            //             }
+            //         })
+            //     }
+            //     updateData = true
+            // }
             connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
                 //console.log(res)
                 if (err) {
@@ -107,11 +132,11 @@ exports.createData = function (req, res) {
             })
             updateData = true
         }
+
         console.log(updateData)
         fileName = fs.readdirSync('./upload/')
         console.log('File name is: ' + fileName.length)
-        if((updateData == true) && (fileName.length != 0))
-        {
+        if ((updateData == true) && (fileName.length != 0)) {
             console.log('Database new data has been added')
             removeFile(fileName)
             res.json({ body: updateData })

@@ -38,6 +38,19 @@ function dragOverHandler(ev){
 let complete = false;
 
 async function updateData() {
+    /*
+    let nullDataSelect = document.getElementById('nullEntry')
+    console.log(nullDataSelect)
+    let nullInput
+
+    if(nullDataSelect === 'true')
+    {
+        nullInput = true
+    }else{
+        nullInput = false
+    }
+    */
+    //let nullData = false;
 
     console.log('data function')
     const res = await fetch('/updateData', {
@@ -47,6 +60,7 @@ async function updateData() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            //nullData: nullInput
             //blank
             /*
             process_reference: '1',
