@@ -93,19 +93,25 @@ $(document).ready(function () {
     $.post('/createQuery', formData, function (data, status, jqXHR) { // success callback
       console.log('status: ' + status + ', data: ' + data)
       // $('#resultsContainer').empty()
+      console.log('BE stuff' + data.length)
+      let durationTotal = 0
       $.each(data, function (index, lightning) {
         // console.log(lightning)
         // alert(index + ': ' + value)
         $('#resultsContainer').append('<tr><td>' + lightning.flash_ID + '</td><td>' + lightning.process_reference + '</td><td>' + lightning.stroke_channel_num + '</td>' +
         '<td>' + new Date(lightning.process_day).toISOString().slice(0, 10) /* lightning.process_day */+ '</td>' + '<td>' + lightning.process_time + '</td>' + '<td>' + lightning.process_time_millisecond + '</span>' +
         '<td>' + lightning.process + '</td>' + '<td>' + lightning.strike_point + '</td>' + '<td>' + lightning.polarity + '</td>' + '<td>' + lightning.visibility + '</td>' +
-        '<td>' + lightning.duration + '</td>' +
+        '<td>' + lightning.duration + '</ td>' +
         '</tr>')
+        durationTotal += Number(lightning.duration)
       })
+      console.log(durationTotal)
       $('#numResultsContainer').empty()
       const resultsCount = $('#resultsContainer tr').length - 1
       $('#numResultsContainer').append('<h2>Results Table</h2>')
-      $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
+      $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label><br/>' +
+      '<label><b>Average Duration: </b>' + ((resultsCount === 0) ? 0 : (durationTotal / resultsCount)) + '</label')
+      $('#numResultsContainer').append('')
     })
   })
 })

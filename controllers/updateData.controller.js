@@ -6,13 +6,12 @@ const fs = require('fs')
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
 
-async function removeFile(fileName) {
-    await unlinkAsync('./upload/' + fileName)
-    return
+async function removeFile (fileName) {
+  await unlinkAsync('./upload/' + fileName)
 }
 
-var deleteData = false
-var updateData = false
+let deleteData = false
+let updateData = false
 
 let process_day = ''
 let process_time = ''
@@ -62,33 +61,33 @@ exports.createData = function (req, res) {
             d = rows.map(d => d[16])
         })
 
-        //'./HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
-        // console.log('No. of entries: ' + pr.length)
-        for (let x = 1; x < pr.length; x++) { //pr.length
-            //const newLightning = new Lightning(req.body)
-            process_reference = pr[x]
-            stroke_channel_num = scn[x]
-            process = p[x]
-            strike_point = sp[x]
-            polarity = pol[x]
-            visibility = v[x]
-            duration = d[x]
-            process_day = py[x] + '-' + pm[x] + '-' + pd[x]
-            process_time = ph[x] + ':' + pmin[x] + ':' + ps[x]
-            process_time_millisecond = pmilli[x]
+    // './HSvideos_and_LLS_11May2020_MCF.xlsx'  , { sheet: 'HS_data' }
+    // console.log('No. of entries: ' + pr.length)
+    for (let x = 1; x < pr.length; x++) { // pr.length
+      // const newLightning = new Lightning(req.body)
+      process_reference = pr[x]
+      stroke_channel_num = scn[x]
+      process = p[x]
+      strike_point = sp[x]
+      polarity = pol[x]
+      visibility = v[x]
+      duration = d[x]
+      process_day = py[x] + '-' + pm[x] + '-' + pd[x]
+      process_time = ph[x] + ':' + pmin[x] + ':' + ps[x]
+      process_time_millisecond = pmilli[x]
 
-            const newLightning = {
-                process_reference,
-                stroke_channel_num,
-                process_day,
-                process_time,
-                process,
-                process_time_millisecond,
-                strike_point,
-                polarity,
-                visibility,
-                duration
-            }
+      const newLightning = {
+        process_reference,
+        stroke_channel_num,
+        process_day,
+        process_time,
+        process,
+        process_time_millisecond,
+        strike_point,
+        polarity,
+        visibility,
+        duration
+      }
             //validate new entries
             //console.log('Checkbox: ' + nullInclude)
             // if (!nullInclude) {
@@ -140,33 +139,31 @@ exports.createData = function (req, res) {
             console.log('Database new data has been added')
             removeFile(fileName)
             res.json({ body: updateData })
-        }
-    } else {
-        console.log("File name is empty. Please upload a file")
-        updateData = false
-        res.json({ body: updateData })
-    }
+  } else {
+    console.log('File name is empty. Please upload a file')
+    updateData = false
+    res.json({ body: updateData })
+  }
 }
 
 exports.deleteData = function (req, res) {
-    connection.query('DELETE FROM flash_table WHERE flash_ID > 0', function (err, res) {
+  connection.query('DELETE FROM flash_table WHERE flash_ID > 0', function (err, res) {
+    if (err) {
+      console.log('error: ', err)
+      res(err, null)
+    } else {
+      connection.query('ALTER TABLE flash_table AUTO_INCREMENT = 1', function (err, res) {
         if (err) {
-            console.log('error: ', err)
-            res(err, null)
+          console.log('error: ', err)
+          res(err, null)
         } else {
-            connection.query('ALTER TABLE flash_table AUTO_INCREMENT = 1', function (err, res) {
-                if (err) {
-                    console.log('error: ', err)
-                    res(err, null)
-                } else {
-                    deleteData = true
-                    connection.release
-                }
-            })
+          deleteData = true
+          connection.release
         }
-    })
-    deleteData = true
-    console.log('Database cleared?: ' + deleteData)
-    res.json({ body: deleteData })
+      })
+    }
+  })
+  deleteData = true
+  console.log('Database cleared?: ' + deleteData)
+  res.json({ body: deleteData })
 }
-

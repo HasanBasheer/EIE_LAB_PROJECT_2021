@@ -4,7 +4,8 @@ const SearchObject = function (searchObject) {
   this.processReference = searchObject.processReference
   this.minNumStroke = searchObject.minNumStroke
   this.maxNumStroke = searchObject.maxNumStroke
-  this.date = searchObject.date
+  this.minDate = searchObject.minDate
+  this.maxDate = searchObject.maxDate
   this.maxduration = searchObject.maxduration
   this.maxstrikepoint = searchObject.maxstrikepoint
   this.minduration = searchObject.minduration
@@ -41,26 +42,27 @@ SearchObject.createQuery = function (searchObject, result) {
 
   if (searchObject.includeNull === 'true') {
     if (searchObject.processReference) {
-      searchQuery += ' and process_reference = ? or process_reference is null'
+      searchQuery += ' and (process_reference = ? or process_reference is null)'
       searchParams.push(searchObject.processReference)
     }
     if (searchObject.minNumStroke && searchObject.maxNumStroke) {
-      searchQuery += ' and stroke_channel_num between ? and ? or stroke_channel_num is null'
-      searchParams.push(searchObject.minNumStroke)
-      searchParams.push(searchObject.maxNumStroke)
+      searchQuery += ' and (stroke_channel_num between ? and ? or stroke_channel_num is null)'
+      searchParams.push(Number(searchObject.minNumStroke))
+      searchParams.push(Number(searchObject.maxNumStroke))
     }
-    if (searchObject.date) {
-      searchQuery += ' and process_day = ? or process_day is null'
-      searchParams.push(searchObject.date)
+    if (searchObject.minDate && searchObject.maxDate) {
+      searchQuery += ' and process_day between ? and ?'
+      searchParams.push(searchObject.minDate)
+      searchParams.push(searchObject.maxDate)
     }
     if (searchObject.time) {
-      searchQuery += ' and process_time = ? or process_time is null'
+      searchQuery += ' and (process_time = ? or process_time is null)'
       searchParams.push(searchObject.time)
     }
     if (searchObject.minMsTime && searchObject.maxMsTime) {
-      searchQuery += ' and process_time_millisecond between ? and ? or process_time_millisecond is null'
-      searchParams.push(searchObject.minMsTime)
-      searchParams.push(searchObject.maxMsTime)
+      searchQuery += ' and (process_time_millisecond between ? and ? or process_time_millisecond is null)'
+      searchParams.push(Number(searchObject.minMsTime))
+      searchParams.push(Number(searchObject.maxMsTime))
     }
     if (searchObject.processes_m || searchObject.processes_stroke || searchObject.processes_attemptedlead || searchObject.processes_spider || searchObject.processes_up ||
       searchObject.processes_mup || searchObject.processes_srs || searchObject.processes_evant || searchObject.processes_evpost || searchObject.processes_cc ||
@@ -106,7 +108,7 @@ SearchObject.createQuery = function (searchObject, result) {
         processInValues.push('Without Classification')
       }
       if (processInValues.length > 0) {
-        searchQuery += ' and process in (?) or process is null'
+        searchQuery += ' and (process in (?) or process is null)'
         searchParams.push(processInValues)
       }
     }
@@ -119,19 +121,19 @@ SearchObject.createQuery = function (searchObject, result) {
         processInValues.push('out')
       }
       if (processInValues.length > 0) {
-        searchQuery += ' and visibility in (?) or visibility is null'
+        searchQuery += ' and (visibility in (?) or visibility is null)'
         searchParams.push(processInValues)
       }
     }
     if (searchObject.minstrikepoint && searchObject.maxstrikepoint) {
-      searchQuery += ' and strike_point between ? and ? or strike_point is null'
-      searchParams.push(searchObject.minstrikepoint)
-      searchParams.push(searchObject.maxstrikepoint)
+      searchQuery += ' and (strike_point between ? and ? or strike_point is null)'
+      searchParams.push(Number(searchObject.minstrikepoint))
+      searchParams.push(Number(searchObject.maxstrikepoint))
     }
     if (searchObject.minduration && searchObject.maxduration) {
-      searchQuery += ' and duration between ? and ? or duration is null'
-      searchParams.push(searchObject.minduration)
-      searchParams.push(searchObject.maxduration)
+      searchQuery += ' and (duration between ? and ? or duration is null)'
+      searchParams.push(Number(searchObject.minduration))
+      searchParams.push(Number(searchObject.maxduration))
     }
     if (searchObject.polarities_positive || searchObject.polarities_negative || searchObject.polarities_wc) {
       const processInValues = []
@@ -145,7 +147,7 @@ SearchObject.createQuery = function (searchObject, result) {
         processInValues.push('Without Classification')
       }
       if (processInValues.length > 0) {
-        searchQuery += ' and polarity in (?) or polarity is null'
+        searchQuery += ' and (polarity in (?) or polarity is null)'
         searchParams.push(processInValues)
       }
     }
@@ -156,12 +158,13 @@ SearchObject.createQuery = function (searchObject, result) {
     }
     if (searchObject.minNumStroke && searchObject.maxNumStroke) {
       searchQuery += ' and stroke_channel_num between ? and ?'
-      searchParams.push(searchObject.minNumStroke)
-      searchParams.push(searchObject.maxNumStroke)
+      searchParams.push(Number(searchObject.minNumStroke))
+      searchParams.push(Number(searchObject.maxNumStroke))
     }
-    if (searchObject.date) {
-      searchQuery += ' and process_day = ?'
-      searchParams.push(searchObject.date)
+    if (searchObject.minDate && searchObject.maxDate) {
+      searchQuery += ' and process_day between ? and ?'
+      searchParams.push(searchObject.minDate)
+      searchParams.push(searchObject.maxDate)
     }
     if (searchObject.time) {
       searchQuery += ' and process_time = ?'
@@ -169,8 +172,8 @@ SearchObject.createQuery = function (searchObject, result) {
     }
     if (searchObject.minMsTime && searchObject.maxMsTime) {
       searchQuery += ' and process_time_millisecond between ? and ?'
-      searchParams.push(searchObject.minMsTime)
-      searchParams.push(searchObject.maxMsTime)
+      searchParams.push(Number(searchObject.minMsTime))
+      searchParams.push(Number(searchObject.maxMsTime))
     }
     if (searchObject.processes_m || searchObject.processes_stroke || searchObject.processes_attemptedlead || searchObject.processes_spider || searchObject.processes_up ||
     searchObject.processes_mup || searchObject.processes_srs || searchObject.processes_evant || searchObject.processes_evpost || searchObject.processes_cc ||
@@ -235,13 +238,13 @@ SearchObject.createQuery = function (searchObject, result) {
     }
     if (searchObject.minstrikepoint && searchObject.maxstrikepoint) {
       searchQuery += ' and strike_point between ? and ?'
-      searchParams.push(searchObject.minstrikepoint)
-      searchParams.push(searchObject.maxstrikepoint)
+      searchParams.push(Number(searchObject.minstrikepoint))
+      searchParams.push(Number(searchObject.maxstrikepoint))
     }
     if (searchObject.minduration && searchObject.maxduration) {
       searchQuery += ' and duration between ? and ?'
-      searchParams.push(searchObject.minduration)
-      searchParams.push(searchObject.maxduration)
+      searchParams.push(Number(searchObject.minduration))
+      searchParams.push(Number(searchObject.maxduration))
     }
     if (searchObject.polarities_positive || searchObject.polarities_negative || searchObject.polarities_wc) {
       const processInValues = []
@@ -260,15 +263,19 @@ SearchObject.createQuery = function (searchObject, result) {
       }
     }
   }
-  connection.query(searchQuery, searchParams, function (err, res) {
+  // console.log(searchQuery)
+  // console.log(searchParams)
+  const q = connection.query(searchQuery, searchParams, function (err, res) {
     if (err) {
       // console.log('Could not find user with email address ' + searchObject, err)
       result(null, null)
     } else {
+      // console.log('data returned: ' + res.length)
       result(null, res)
     }
   })
-  connection.release
+  // console.log(q)
+  // connection.release
 }
 
 module.exports = SearchObject
