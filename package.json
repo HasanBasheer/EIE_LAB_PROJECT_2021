@@ -11,6 +11,11 @@
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.13",
     "php": "^1.0.2",
-    "read-excel-file": "^5.2.13"
+    "read-excel-file": "^5.2.13",
+    "supertest": "^6.1.6",
+    "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "jest": "^27.3.0"
   }
 }
