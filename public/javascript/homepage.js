@@ -81,17 +81,21 @@ $(document).ready(function () {
     }
     if ((!isEmpty($('#minDate').val()) && isEmpty($('#maxDate').val())) || (isEmpty($('#minDate').val()) && !isEmpty($('#maxDate').val()))) {
       alert('Please fill in both maximum and minimum range values for the date')
+      return
     }
 
     if ((!isEmpty($('#minMsTimeBox').val()) && isEmpty($('#maxMsTimeBox').val())) || (isEmpty($('#minMsTimeBox').val()) && !isEmpty($('#maxMsTimeBox').val()))) {
       alert('Please ensure that you fill in both maximum and minimum range values for the millisecond')
+      return
     }
 
     if ((!isEmpty($('#minstrikepointbox').val()) && isEmpty($('#maxstrikepointbox').val())) || (isEmpty($('#minstrikepointbox').val()) && !isEmpty($('#maxstrikepointbox').val()))) {
       alert('Please ensure that you fill in both maximum and minimum range values for the strike point')
+      return
     }
     if ((!isEmpty($('#mindurationbox').val()) && isEmpty($('#maxdurationbox').val())) || (isEmpty($('#mindurationbox').val()) && !isEmpty($('#maxdurationbox').val()))) {
       alert('Please ensure that you fill in both maximum and minimum range values for the duration')
+      return
     }
     $('#flex-container').find('input').each(function () {
       const $this = $(this)
