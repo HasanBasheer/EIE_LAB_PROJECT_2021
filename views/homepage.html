@@ -20,17 +20,6 @@
             <input type="number" name="processReference" id="processReference" min="1" max="9999">
         </div>
         <div>
-            <label id="lblStrokes">Number of strokes in same channel: </label><br>
-            <div>
-                <label for="minNumStrokeSlider">Min: </label>
-                <input id="minNumStrokeSlider" type="range" min="0" max="99" value="0" oninput="minNumStrokeBox.value=minNumStrokeSlider.value">
-                <input id="minNumStrokeBox" type="number" value="0" min="0" max="99" name="minNumStroke" oninput="minNumStrokeSlider.value=minNumStrokeBox.value">
-                <label for="maxNumStrokeSlider">Max: </label>
-                <input id="maxNumStrokeSlider" type="range" min="0" max="99" value="99" oninput="maxNumStrokeBox.value=maxNumStrokeSlider.value">
-                <input id="maxNumStrokeBox" type="number" value="99" min="0" max="99" name="maxNumStroke" oninput="maxNumStrokeSlider.value=maxNumStrokeBox.value">
-            </div>
-        </div>
-        <div>
             <label id="lblDate">Date</label>
             <div>
                 <label for="minDate">Min:</label>
@@ -44,11 +33,11 @@
             <label id="lblMilliseconds">Milliseconds: </label><br>
             <div>
                 <label for="minMsTimeSlider">Min: </label>
-                <input id="minMsTimeSlider" type="range" min="0" max="999" value="0" oninput="minMsTimeBox.value=minMsTimeSlider.value">
-                <input id="minMsTimeBox" type="number" value="0" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value"> 
+                <input id="minMsTimeSlider" type="range" min="0" max="999" value="" oninput="minMsTimeBox.value=minMsTimeSlider.value">
+                <input id="minMsTimeBox" type="number" value="" min="0" max="999" name="minMsTime" oninput="minMsTimeSlider.value=minMsTimeBox.value"> 
                 <label for="maxMsTimeSlider">Max: </label>
-                <input id="maxMsTimeSlider" type="range" min="0" max="999" value="999" oninput="maxMsTimeBox.value=maxMsTimeSlider.value">
-                <input id="maxMsTimeBox" type="number" value="999" min="0" max="999" name="maxMsTime" oninput="maxMsTimeSlider.value=maxMsTimeBox.value">
+                <input id="maxMsTimeSlider" type="range" min="0" max="999" value="" oninput="maxMsTimeBox.value=maxMsTimeSlider.value">
+                <input id="maxMsTimeBox" type="number" value="" min="0" max="999" name="maxMsTime" oninput="maxMsTimeSlider.value=maxMsTimeBox.value">
             </div>    
         </div>
         </div>
@@ -126,21 +115,21 @@
         <div>
             <label id="lblStrikePoint">Strike Point</label> <br>
             <label for="minstrikepoint">Min</label>
-            <input id="minstrikepoint" type="range" min="0" max="10" value="0" oninput="minstrikepointbox.value=minstrikepoint.value">
-            <input id="minstrikepointbox" type="number" value="0" min="0" max="10" name= "minstrikepoint" oninput="minstrikepoint.value=minstrikepointbox.value">
+            <input id="minstrikepoint" type="range" min="0" max="10" value="" oninput="minstrikepointbox.value=minstrikepoint.value">
+            <input id="minstrikepointbox" type="number" value="" min="0" max="10" name= "minstrikepoint" oninput="minstrikepoint.value=minstrikepointbox.value">
             <label for="maxstrikepoint">Max</label>
-            <input id="maxstrikepoint" type="range" min="0" max="10" value="10" oninput="maxstrikepointbox.value=maxstrikepoint.value">
-            <input id="maxstrikepointbox" type="number" value="10" min="0" max="10" name="maxstrikepoint" oninput="maxstrikepoint.value=maxstrikepointbox.value">
+            <input id="maxstrikepoint" type="range" min="0" max="10" value="" oninput="maxstrikepointbox.value=maxstrikepoint.value">
+            <input id="maxstrikepointbox" type="number" value="" min="0" max="10" name="maxstrikepoint" oninput="maxstrikepoint.value=maxstrikepointbox.value">
         </div>
         <div>
             <label id="lblDuration">Duration: </label><br>
             <div class="DurationSlideContainer">
                 <label for="minduration">Min: </label>
-                <input id="minduration" type="range" min="0" max="1200" value="0" oninput="mindurationbox.value=minduration.value">
-                <input id="mindurationbox" type="number" value="0" min="0" max="1200" name="minduration" oninput="minduration.value=mindurationbox.value">
+                <input id="minduration" type="range" min="0" max="1200" value="" oninput="mindurationbox.value=minduration.value">
+                <input id="mindurationbox" type="number" value="" min="0" max="1200" name="minduration" oninput="minduration.value=mindurationbox.value">
                 <label for="maxduration">Max: </label>
-                <input id="maxduration" type="range" min="0" max="1200" value="1200" oninput="maxdurationbox.value=maxduration.value">
-                <input id="maxdurationbox" type="number" value="1200" min="0" max="1200" name="maxduration" oninput="maxduration.value=maxdurationbox.value">
+                <input id="maxduration" type="range" min="0" max="1200" value="" oninput="maxdurationbox.value=maxduration.value">
+                <input id="maxdurationbox" type="number" value="" min="0" max="1200" name="maxduration" oninput="maxduration.value=maxdurationbox.value">
             </div>
 
         </div>
@@ -161,19 +150,13 @@
                 </div>
             </div>  
         </div>
-        <div id="includeContainer">
-            <div>
-                <input type="checkbox" id="includeNull" name="includeNull" value="">
-                <label for="lblincludeNull"><b>Include null values?</b></label>
-            </div>
-        </div>
     </section>
     <section id="resultsSection">
         <div id="numResultsContainer">
             <h2>Results Table: </h2>
         </div>
         <table id="resultsContainer">
-            <tr><td>  <b>Flash_ID</b>  </td><td>  <b>Process Reference</b>  </td><td>  <b>Number of Strokes in same Channel</b>  </td> 
+            <tr><td> <b>Process Reference</b>  </td><td>  <b>Number of Strokes in same Channel</b>  </td> 
                 <td>  <b>Date (YYYY-MM-DD)</b>  </td><td>  <b>Time (HH:MM:SS)</b>  </td><td>  <b>Time (ms)</b>  </td><td>  <b>Process</b>  </td><td>  <b>Strike Point</b> 
                 </td><td>  <b>Polarity</b>  </td><td>  <b>Visibility</b>  </td><td>  <b>Duration (ms)</b>  </td> 
                 </tr>
@@ -182,7 +165,7 @@
     <section id="buttonsContainer">
         <div>
             <input type="button" id="filterButton" value="Filter Search"> <br>
-            <input type="reset" id="clearFilter" value="Clear Filters"> <br>
+            <input type="reset" id="clearFilter" value="Clear Results"> <br>
               <form action="/upload" method="GET">
                   <button type="submit" id="upload"> Upload Data</button>
               </form>
