@@ -102,33 +102,33 @@ text-align: left;
 }
 #resultsSection{
     position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 900px;
-    margin: 0 auto 100px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 900px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 #resultsSection #resultsContainer{
     overflow-y: scroll;
     overflow-x: scroll;
-    height: 200px;
+    height: 400px;
     width: 900px;
     justify-content: center;
     display: block;
     border: 1px solid black;
 }
 
-#buttonsContainer{
+#buttonsContainer #buttonsDiv{
     position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 900px;
-    margin: 0 auto 100px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 900px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 #buttonsContainer input, button{
     font-family: "Roboto", sans-serif;
