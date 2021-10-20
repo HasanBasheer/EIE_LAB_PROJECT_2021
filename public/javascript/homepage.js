@@ -128,6 +128,7 @@ $(document).ready(function () {
       console.log('BE stuff' + data.length)
       let durationTotal = 0
       const durationValuesArray = []
+      let dateValuesArray = []
       $.each(data, function (index, lightning) {
         // console.log(lightning)
         // alert(index + ': ' + value)
@@ -138,20 +139,43 @@ $(document).ready(function () {
         '</tr>')
         durationTotal += Number(lightning.duration)
         durationValuesArray.push(Number(lightning.duration))
+        dateValuesArray.push(new Date(lightning.process_day).toISOString().slice(0, 10))
       })
+      const date1 = new Date(dateValuesArray[0])
+      const date2 = new Date(dateValuesArray[dateValuesArray.length-1])
+      console.log(date1 + " " + date2)
+      const diffTime = Math.abs(date2 - date1)
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
       durationValuesArray.sort()
+      durationValuesArray.filter(Number)
       console.log(durationValuesArray)
       console.log(durationValuesArray.length)
+      console.log('Duration Total ' + durationTotal)
       $('#numResultsContainer').empty()
       const resultsCount = $('#resultsContainer tr').length - 1
+      console.log('TOTAL TABLE: ' + resultsCount)
       $('#numResultsContainer').append('<h2>Results Table</h2>')
+      console.log(durationValuesArray)
+      let meanVal = ((resultsCount === 0) ? 0 : (durationTotal / resultsCount))
+      console.log(meanVal)
       $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label><br/>' +
-      '<label><b>Average Duration: </b>' + ((resultsCount === 0) ? 0 : (durationTotal / resultsCount)) + '</label><br/>' +
+      '<label><b>Mean Duration: </b>' + meanVal + '</label><br/>' +
       '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[0]) + '</label><br/>' +
       '<label><b>Max Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length - 1]) + '</label><br/>' +
       // median
-      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length / 2] + durationValuesArray[(durationValuesArray.length / 2) + 1])) + '</label><br/>')
+      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMedian(durationValuesArray)) + '</label><br/>')
       $('#numResultsContainer').append('')
+      // duration range
+      //only keeps integer number and removes everything else
+      $('#numResultsContainer').append('<label><b>Range Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length -1] - durationValuesArray[0])) + '</label><br/>')
+      // standard deviation
+      $('#numResultsContainer').append('<label><b>Standard Deviation Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : stdDev(durationValuesArray, meanVal)) + '</label><br/>')
+      //time range
+      $('#numResultsContainer').append('<label><b>Result Date range (days): </b>' + diffDays + '</label><br/>')
+      //table (histogram) process frequency between different times
+      // Ill think about this one tomorrow ?????
+
     })
   })
 })
@@ -169,3 +193,27 @@ function compareDate (dateTimeA, dateTimeB) {
   else if (momentA < momentB) return -1
   else return 0
 }
+
+function stdDev (durationArray, meanDur) {
+  arraySquares = 0
+  for (let i = 0 ; i < durationArray.length ; i++){
+    arraySquares += (durationArray[i] - meanDur)*(durationArray[i] - meanDur)
+  }
+  arraySquares = arraySquares/(durationArray.length - 1)
+  let stdDeviation = Math.sqrt(arraySquares)
+
+  return stdDeviation
+}
+
+function getMedian(durArray) {
+  let median = 0
+  if((durArray.length % 2) === 0){
+    median = ((durArray[durArray.length / 2] + durArray[(durArray.length / 2) - 1])/2)
+    return median
+  }else{
+    median = (durArray[((durArray.length-1) / 2)])
+    return median
+  }
+
+}
+
