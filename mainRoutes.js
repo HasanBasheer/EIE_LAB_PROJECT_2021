@@ -57,6 +57,8 @@ mainRouter.get('/user/:emailAddress', userController.findByEmailAddress)
 
 mainRouter.post('/createQuery', searchController.createQuery)
 
-//mainRouter.post('/updateData', updateDataController.createData)
+mainRouter.post('/downloadQuery', searchController.downloadQuery)
+
+// mainRouter.post('/updateData', updateDataController.createData)
 
 module.exports = mainRouter

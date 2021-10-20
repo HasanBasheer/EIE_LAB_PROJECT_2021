@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  console.log(m = moment('2013-03-01', 'YYYY-MM-DD'))
   console.log('homepage ready')
   $('#logout').click(function () {
     window.location.href = '/'
@@ -63,47 +64,39 @@ $(document).ready(function () {
       }
     }
   })
-  $('#filterButton').click(function () {
+  $('#filterButton, #downloadReportButton').click(function () {
     const formData = {}
 
-    // if (($('#minDate').val() === '') || ($('#maxDate').val() === '')) {
-    //   if (($('#minDate') === '') && ($('#maxDate') === '')) {
-    //     // do nothing
-    //     exit
-    //   } else {
-    //     alert('Please fill in both maximum and minimum range values for the date')
-    //     return
-    //   }
-    // }
+    if ((!isEmpty($('#minDate').val()) && !isEmpty($('#maxDate').val()))) {
+      console.log(compareDate($('#minDate').val(), $('#maxDate').val()))
+      console.log(compareDate($('#maxDate').val(), $('#minDate').val()))
+      if (compareDate($('#minDate').val(), $('#maxDate').val()) > 0) {
+        alert('Please min date must be less than max date')
+        return
+      }
+      if (compareDate($('#maxDate').val(), $('#minDate').val()) < 0) {
+        alert('Please max date must be greater than min date')
+        return
+      }
+    }
+    if ((!isEmpty($('#minDate').val()) && isEmpty($('#maxDate').val())) || (isEmpty($('#minDate').val()) && !isEmpty($('#maxDate').val()))) {
+      alert('Please fill in both maximum and minimum range values for the date')
+      return
+    }
 
-    // if (($('#minMsTimeBox').val() === '') || ($('#maxMsTimeBox').val() === '')) {
-    //   if (($('#minMsTimeBox') === '') && ($('#maxMsTimeBox') === '')) {
-    //     // do nothing
-    //     exit
-    //   } else {
-    //     alert('Please fill in both maximum and minimum range values for the millisecond')
-    //     return
-    //   }
-    // }
+    if ((!isEmpty($('#minMsTimeBox').val()) && isEmpty($('#maxMsTimeBox').val())) || (isEmpty($('#minMsTimeBox').val()) && !isEmpty($('#maxMsTimeBox').val()))) {
+      alert('Please ensure that you fill in both maximum and minimum range values for the millisecond')
+      return
+    }
 
-    // if (($('#minstrikepointbox').val() === '') || ($('#maxstrikepointbox').val() === '')) {
-    //   if (($('#minstrikepointbox') === '') && ($('#maxstrikepointbox') === '')) {
-    //     // do nothing
-    //   } else {
-    //     alert('Please fill in both maximum and minimum range values for the strike points')
-    //     return
-    //   }
-    // }
-
-    // if (($('#mindurationbox').val() === '') || ($('#maxdurationbox').val() === '')) {
-    //   if (($('#mindurationbox') === '') && ($('#maxdurationbox') === '')) {
-    //     // do nothing
-    //   } else {
-    //     alert('Please fill in both maximum and minimum range values for the duration')
-    //     return
-    //   }
-    // }
-
+    if ((!isEmpty($('#minstrikepointbox').val()) && isEmpty($('#maxstrikepointbox').val())) || (isEmpty($('#minstrikepointbox').val()) && !isEmpty($('#maxstrikepointbox').val()))) {
+      alert('Please ensure that you fill in both maximum and minimum range values for the strike point')
+      return
+    }
+    if ((!isEmpty($('#mindurationbox').val()) && isEmpty($('#maxdurationbox').val())) || (isEmpty($('#mindurationbox').val()) && !isEmpty($('#maxdurationbox').val()))) {
+      alert('Please ensure that you fill in both maximum and minimum range values for the duration')
+      return
+    }
     $('#flex-container').find('input').each(function () {
       const $this = $(this)
       if (!$this.attr('name')) {
@@ -115,11 +108,26 @@ $(document).ready(function () {
         formData[$this.attr('name')] = $this.val()
       }
     })
-    $.post('/createQuery', formData, function (data, status, jqXHR) { // success callback
+    const filterButtonClicked = ($(this).attr('id') === 'filterButton')
+    let postUrl = '/downloadQuery'
+    if (filterButtonClicked) {
+      postUrl = '/createQuery'
+    }
+    $.post(postUrl, formData, function (data, status, jqXHR) { // success callback
       console.log('status: ' + status + ', data: ' + data)
+      if (!filterButtonClicked) {
+        const blob = new Blob([data])
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = 'results.csv'
+        link.click()
+        return
+      }
+
       // $('#resultsContainer').empty()
       console.log('BE stuff' + data.length)
       let durationTotal = 0
+      const durationValuesArray = []
       $.each(data, function (index, lightning) {
         // console.log(lightning)
         // alert(index + ': ' + value)
@@ -129,14 +137,35 @@ $(document).ready(function () {
         '<td>' + lightning.duration + '</ td>' +
         '</tr>')
         durationTotal += Number(lightning.duration)
+        durationValuesArray.push(Number(lightning.duration))
       })
-      console.log(durationTotal)
+      durationValuesArray.sort()
+      console.log(durationValuesArray)
+      console.log(durationValuesArray.length)
       $('#numResultsContainer').empty()
       const resultsCount = $('#resultsContainer tr').length - 1
       $('#numResultsContainer').append('<h2>Results Table</h2>')
       $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label><br/>' +
-      '<label><b>Average Duration: </b>' + ((resultsCount === 0) ? 0 : (durationTotal / resultsCount)) + '</label')
+      '<label><b>Average Duration: </b>' + ((resultsCount === 0) ? 0 : (durationTotal / resultsCount)) + '</label><br/>' +
+      '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[0]) + '</label><br/>' +
+      '<label><b>Max Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length - 1]) + '</label><br/>' +
+      // median
+      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length / 2] + durationValuesArray[(durationValuesArray.length / 2) + 1])) + '</label><br/>')
       $('#numResultsContainer').append('')
     })
   })
 })
+function isEmpty (value) {
+  if (typeof value !== 'undefined' && value) {
+    return false
+  };
+  return true
+}
+
+function compareDate (dateTimeA, dateTimeB) {
+  const momentA = moment(dateTimeA, 'YYYY/MM/DD')
+  const momentB = moment(dateTimeB, 'YYYY/MM/DD')
+  if (momentA > momentB) return 1
+  else if (momentA < momentB) return -1
+  else return 0
+}

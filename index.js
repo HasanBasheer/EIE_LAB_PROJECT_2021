@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const express = require('express')
-//const multer = require('multer')
+// const multer = require('multer')
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -15,7 +15,6 @@ app.get('/upload', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'upload.html'))
 })
 */
-
 
 const mainRouter = require('./mainRoutes')
 app.use(mainRouter)
@@ -43,4 +42,4 @@ const port = process.env.PORT || 3000
 app.listen(port)
 console.log('Express server running on port ', port)
 
-//module.exports = app
+// module.exports = app
