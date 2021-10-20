@@ -1,24 +1,7 @@
 $(document).ready(function () {
-  const resultsCount = $('#resultsContainer tr').length - 1
-  $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
   console.log('homepage ready')
   $('#logout').click(function () {
     window.location.href = '/'
-  })
-
-  $('#minNumStrokeSlider').change(function () {
-    const $this = $(this)
-    if ($this.val() >= $('#maxNumStrokeSlider').val()) {
-      $('#maxNumStrokeSlider').val($this.val())
-      $('#maxNumStrokeBox').val($this.val())
-    }
-  })
-  $('#maxNumStrokeSlider').change(function () {
-    const $this = $(this)
-    if ($this.val() <= $('#minNumStrokeSlider').val()) {
-      $('#minNumStrokeSlider').val($this.val())
-      $('#minNumStrokeBox').val($this.val())
-    }
   })
 
   $('#minMsTimeSlider').change(function () {
@@ -67,18 +50,60 @@ $(document).ready(function () {
   })
 
   $('#clearFilter').click(function () {
-    $('#resultsContainer').empty()
-    $('#resultsContainer').append('<tr><td>' + '<b>Flash_ID</b>' + '</td><td>' + '<b>Process Reference</b>' + '</td><td>' + '<b>Number of Strokes in same Channel</b>' + '</td>' +
-    '<td>' + '<b>Date (YYYY-MM-DD)</b>' + '</td><td>' + '<b>Time (HH:MM:SS)</b>' + '</td><td>' + '<b>Time (ms)</b>' + '</td><td>' + '<b>Process</b>' + '</td><td>' + '<b>Strike Point</b>' +
-    '</td><td>' + '<b>Polarity</b>' + '</td><td>' + '<b>Visibility</b>' + '</td><td>' + '<b>Duration (ms)</b>' + '</td>' +
-    '</tr>')
-    $('#numResultsContainer').empty()
     const resultsCount = $('#resultsContainer tr').length - 1
-    $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label>')
-    $('#numResultsContainer').append('<h2>Results Table</h2>')
+    if (resultsCount > 0) {
+      const clearResultsConfirm = confirm('There are results in the table. Are you sure you would like to clear the results and reset the filters?')
+      if (clearResultsConfirm) {
+        location.reload()
+      }
+    } else {
+      const clearResultsConfirm = confirm('Are you sure you would like to reset the filters?')
+      if (clearResultsConfirm) {
+        location.reload()
+      }
+    }
   })
   $('#filterButton').click(function () {
     const formData = {}
+
+    // if (($('#minDate').val() === '') || ($('#maxDate').val() === '')) {
+    //   if (($('#minDate') === '') && ($('#maxDate') === '')) {
+    //     // do nothing
+    //     exit
+    //   } else {
+    //     alert('Please fill in both maximum and minimum range values for the date')
+    //     return
+    //   }
+    // }
+
+    // if (($('#minMsTimeBox').val() === '') || ($('#maxMsTimeBox').val() === '')) {
+    //   if (($('#minMsTimeBox') === '') && ($('#maxMsTimeBox') === '')) {
+    //     // do nothing
+    //     exit
+    //   } else {
+    //     alert('Please fill in both maximum and minimum range values for the millisecond')
+    //     return
+    //   }
+    // }
+
+    // if (($('#minstrikepointbox').val() === '') || ($('#maxstrikepointbox').val() === '')) {
+    //   if (($('#minstrikepointbox') === '') && ($('#maxstrikepointbox') === '')) {
+    //     // do nothing
+    //   } else {
+    //     alert('Please fill in both maximum and minimum range values for the strike points')
+    //     return
+    //   }
+    // }
+
+    // if (($('#mindurationbox').val() === '') || ($('#maxdurationbox').val() === '')) {
+    //   if (($('#mindurationbox') === '') && ($('#maxdurationbox') === '')) {
+    //     // do nothing
+    //   } else {
+    //     alert('Please fill in both maximum and minimum range values for the duration')
+    //     return
+    //   }
+    // }
+
     $('#flex-container').find('input').each(function () {
       const $this = $(this)
       if (!$this.attr('name')) {
@@ -98,7 +123,7 @@ $(document).ready(function () {
       $.each(data, function (index, lightning) {
         // console.log(lightning)
         // alert(index + ': ' + value)
-        $('#resultsContainer').append('<tr><td>' + lightning.flash_ID + '</td><td>' + lightning.process_reference + '</td><td>' + lightning.stroke_channel_num + '</td>' +
+        $('#resultsContainer').append('<tr>><td>' + lightning.process_reference + '</td><td>' + lightning.stroke_channel_num + '</td>' +
         '<td>' + new Date(lightning.process_day).toISOString().slice(0, 10) /* lightning.process_day */+ '</td>' + '<td>' + lightning.process_time + '</td>' + '<td>' + lightning.process_time_millisecond + '</span>' +
         '<td>' + lightning.process + '</td>' + '<td>' + lightning.strike_point + '</td>' + '<td>' + lightning.polarity + '</td>' + '<td>' + lightning.visibility + '</td>' +
         '<td>' + lightning.duration + '</ td>' +
