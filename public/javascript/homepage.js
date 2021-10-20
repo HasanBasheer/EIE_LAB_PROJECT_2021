@@ -84,9 +84,15 @@ $(document).ready(function () {
     }
 
     if ((!isEmpty($('#minMsTimeBox').val()) && isEmpty($('#maxMsTimeBox').val())) || (isEmpty($('#minMsTimeBox').val()) && !isEmpty($('#maxMsTimeBox').val()))) {
-      alert('Please fill in both maximum and minimum range values for the millisecond')
+      alert('Please ensure that you fill in both maximum and minimum range values for the millisecond')
     }
 
+    if ((!isEmpty($('#minstrikepointbox').val()) && isEmpty($('#maxstrikepointbox').val())) || (isEmpty($('#minstrikepointbox').val()) && !isEmpty($('#maxstrikepointbox').val()))) {
+      alert('Please ensure that you fill in both maximum and minimum range values for the strike point')
+    }
+    if ((!isEmpty($('#mindurationbox').val()) && isEmpty($('#maxdurationbox').val())) || (isEmpty($('#mindurationbox').val()) && !isEmpty($('#maxdurationbox').val()))) {
+      alert('Please ensure that you fill in both maximum and minimum range values for the duration')
+    }
     $('#flex-container').find('input').each(function () {
       const $this = $(this)
       if (!$this.attr('name')) {
@@ -140,7 +146,7 @@ $(document).ready(function () {
       '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[0]) + '</label><br/>' +
       '<label><b>Max Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length - 1]) + '</label><br/>' +
       // median
-      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length / 2]) + '</label><br/>')
+      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length / 2] + durationValuesArray[(durationValuesArray.length / 2) + 1])) + '</label><br/>')
       $('#numResultsContainer').append('')
     })
   })
