@@ -113,23 +113,28 @@ exports.createData = function (req, res) {
             //     }
             //     updateData = true
             // }
-            connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
-                //console.log(res)
-                if (err) {
-                    console.log('Error: Not Found')
-                    console.log('error: ', err)
-                    //res(err, null)
-                } else if (!res.length) {
-                    connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
-                        if (err) {
-                            console.log('error: ', err)
-                            res(err, null)
-                        }
-                        connection.release
-                    })
-                }
-            })
-            updateData = true
+            if ((!process_reference) || (!process_day) || (!process_time) || (!process_time_millisecond) || (!process)) {
+                //These are important metrics and cannot be null
+                console.log('Null entries pertaining to important paramters have been ignored')
+            } else {
+                connection.query('SELECT * FROM flash_table WHERE (process_day = ? AND process_time = ? AND process_time_millisecond = ?)', [process_day, process_time, process_time_millisecond], function (err, res) {
+                    //console.log(res)
+                    if (err) {
+                        console.log('Error: Not Found')
+                        console.log('error: ', err)
+                        //res(err, null)
+                    } else if (!res.length) {
+                        connection.query('INSERT INTO flash_table set ?', newLightning, function (err, res) {
+                            if (err) {
+                                console.log('error: ', err)
+                                res(err, null)
+                            }
+                            connection.release
+                        })
+                    }
+                })
+                updateData = true
+            }
         }
 
         console.log(updateData)
