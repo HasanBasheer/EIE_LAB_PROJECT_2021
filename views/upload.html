@@ -6,13 +6,6 @@
 	<script src="javascript/upload.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/css/upload.css">
 </head>
-
-<!-- <body>
-	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-		<p>Drag the file to this Drop Zone ...</p>
-	</div>
-</body> -->
-
 <body>
 	<form method="post" enctype="multipart/form-data">
 		<div>
@@ -22,22 +15,17 @@
 		<div>
 			<input type="submit" name="btn_upload_file" value="Upload" onclick="return uploadData()" />
 		</div>
+		<label>Note: Please only upload one file each time you click update data (i.e. Once you upload a file, click update data to confirm it is sent to the database. Then you can upload a new file and repeat the process)</label>
 	</form>
 	<form>
-		<!-- <div>
-			<input type="checkbox" id="nullEntryTrue" name="nullEntry" value="true">
-			<label for="nullEntry"> Keep the entries with NULL fields? (i.e keep all data)</label><br>
-		</div> -->
+		<label>Please wait for a confirmation box to ensure action has been completed</label>
 		<div>
 			<button id="updateButton" type="submit" onclick="return updateData()">Update Data</button>
-			<!-- <div id="loader" style="display: none">Loading...</div>
-			<div id="content"></div> -->
 		</div>
 		<div>
 			<button id="Data" type="submit" onclick="return deleteData()">Clear Database</button>
 		</div>
 		<div>
-			<!-- <button type="submit" value="return" onclick="history.back()">Return</button> -->
 			<input type="button" value="Return" onclick="changeOver()">
 		</div>
 
