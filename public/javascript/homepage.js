@@ -147,8 +147,9 @@ $(document).ready(function () {
       const diffTime = Math.abs(date2 - date1)
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-      durationValuesArray.sort()
       durationValuesArray.filter(Number)
+      durationValuesArray.sort(function(a, b){return a-b})
+
       console.log(durationValuesArray)
       console.log(durationValuesArray.length)
       console.log('Duration Total ' + durationTotal)
