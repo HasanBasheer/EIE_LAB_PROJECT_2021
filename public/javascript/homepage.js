@@ -128,17 +128,21 @@ $(document).ready(function () {
       console.log('BE stuff' + data.length)
       let durationTotal = 0
       const durationValuesArray = []
+      let processRefArray = []
       let dateValuesArray = []
       $.each(data, function (index, lightning) {
         // console.log(lightning)
         // alert(index + ': ' + value)
-        $('#resultsContainer').append('<tr>><td>' + lightning.process_reference + '</td><td>' + lightning.stroke_channel_num + '</td>' +
+        $('#resultsContainer').append('<tr>><td>' + lightning.process_reference + '</td>' +
         '<td>' + new Date(lightning.process_day).toISOString().slice(0, 10) /* lightning.process_day */+ '</td>' + '<td>' + lightning.process_time + '</td>' + '<td>' + lightning.process_time_millisecond + '</span>' +
         '<td>' + lightning.process + '</td>' + '<td>' + lightning.strike_point + '</td>' + '<td>' + lightning.polarity + '</td>' + '<td>' + lightning.visibility + '</td>' +
-        '<td>' + lightning.duration + '</ td>' +
+        '<td>' + lightning.duration + '</ td>' + '<td>' + lightning.stroke_channel_num + '</td>' +
         '</tr>')
         durationTotal += Number(lightning.duration)
+        processRefArray.push(lightning.process_reference)
+        if(Number(lightning.duration) != 0){
         durationValuesArray.push(Number(lightning.duration))
+      }
         dateValuesArray.push(new Date(lightning.process_day).toISOString().slice(0, 10))
       })
       const date1 = new Date(dateValuesArray[0])
@@ -150,6 +154,8 @@ $(document).ready(function () {
       durationValuesArray.filter(Number)
       durationValuesArray.sort(function(a, b){return a-b})
 
+      let unique = processRefArray.filter((item, i, ar) => ar.indexOf(item) === i)
+
       console.log(durationValuesArray)
       console.log(durationValuesArray.length)
       console.log('Duration Total ' + durationTotal)
@@ -158,24 +164,25 @@ $(document).ready(function () {
       console.log('TOTAL TABLE: ' + resultsCount)
       $('#numResultsContainer').append('<h2>Results Table</h2>')
       console.log(durationValuesArray)
-      let meanVal = ((resultsCount === 0) ? 0 : (durationTotal / resultsCount))
+      let meanVal = ((resultsCount === 0) ? 0 : (durationTotal / durationValuesArray.length))
       console.log(meanVal)
       $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label><br/>' +
-      '<label><b>Mean Duration: </b>' + meanVal + '</label><br/>' +
+      '<label><b>Mean Duration: </b>' + meanVal.toFixed(2) + '</label><br/>' +
       '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMin(durationValuesArray)) + '</label><br/>' +
       '<label><b>Max Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length - 1]) + '</label><br/>' +
       // median
-      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMedian(durationValuesArray)) + '</label><br/>')
+      '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMedian(durationValuesArray).toFixed(2)) + '</label><br/>')
       $('#numResultsContainer').append('')
       // duration range
       //only keeps integer number and removes everything else
-      $('#numResultsContainer').append('<label><b>Range Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length -1] - durationValuesArray[0])) + '</label><br/>')
+      $('#numResultsContainer').append('<label><b>Range Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : (durationValuesArray[durationValuesArray.length -1] - getMin(durationValuesArray)).toFixed(2)) + '</label><br/>')
       // standard deviation
-      $('#numResultsContainer').append('<label><b>Standard Deviation Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : stdDev(durationValuesArray, meanVal)) + '</label><br/>')
+      $('#numResultsContainer').append('<label><b>Standard Deviation Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : stdDev(durationValuesArray, meanVal).toFixed(2)) + '</label><br/>')
       //time range
       $('#numResultsContainer').append('<label><b>Result Date range (days): </b>' + diffDays + '</label><br/>')
       //table (histogram) process frequency between different times
       // Ill think about this one tomorrow ?????
+      $('#numResultsContainer').append('<label><b>Number of Unique Events: </b>' + unique.length + '</label><br/>')
 
     })
   })
