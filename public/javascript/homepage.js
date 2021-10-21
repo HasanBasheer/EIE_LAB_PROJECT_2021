@@ -162,7 +162,7 @@ $(document).ready(function () {
       console.log(meanVal)
       $('#numResultsContainer').append('<label><b>Number of Results: </b>' + resultsCount + '</label><br/>' +
       '<label><b>Mean Duration: </b>' + meanVal + '</label><br/>' +
-      '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[0]) + '</label><br/>' +
+      '<label><b>Min Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMin(durationValuesArray)) + '</label><br/>' +
       '<label><b>Max Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : durationValuesArray[durationValuesArray.length - 1]) + '</label><br/>' +
       // median
       '<label><b>Median Duration Value: </b>' + ((durationValuesArray.length === 0) ? 0 : getMedian(durationValuesArray)) + '</label><br/>')
@@ -216,5 +216,10 @@ function getMedian(durArray) {
     return median
   }
 
+}
+
+function getMin(dArray){
+  let minValue = Math.min.apply(null, dArray.filter(Boolean));
+  return minValue
 }
 
